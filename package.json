@@ -1,0 +1,30 @@
+{
+  "name": "w-guide",
+  "version": "1.0.0",
+  "description": "React package",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/khacywin/w-guide.git"
+  },
+  "keywords": [
+    "guide",
+    "first",
+    "time",
+    "react"
+  ],
+  "author": "khacywin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/khacywin/w-guide/issues"
+  },
+  "homepage": "https://github.com/khacywin/w-guide#readme",
+  "devDependencies": {
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "rollup": "^2.44.0"
+  }
+}
