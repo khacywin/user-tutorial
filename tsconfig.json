@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "declaration": true,
+    "declarationDir": "build",
+    "module": "ES2015",
+    "target": "ES6",
+    "sourceMap": true,
+    "jsx": "react",
+    "moduleResolution": "node",
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true
+  },
+  "include": [
+    "src/**/*",
+    "src/*.d.ts"
+, "stories"  ],
+  "exclude": [
+    "node_modules",
+    "build",
+    "**/*.stories.tsx",
+    "**/*.test.tsx"
+  ]
+}

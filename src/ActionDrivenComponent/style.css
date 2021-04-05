@@ -1,0 +1,59 @@
+.w-guide-tap-click {
+  position: relative;
+}
+.w-guide-tap-click::after {
+  animation-delay: 0.4s;
+  animation: tapClick 0.8s ease-out infinite;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  content: "";
+  display: block;
+  height: 120%;
+  left: 50%;
+  pointer-events: none;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  width: 120%;
+}
+
+.w-guide-text {
+  color: #fff;
+  height: max-content;
+  max-width: 50vw;
+  padding: 10px;
+  pointer-events: none;
+  position: absolute;
+  user-select: none;
+  width: max-content;
+  z-index: 10;
+}
+.w-guide-text.left{
+  top: 0;
+  right: calc(100% + 10px);
+}
+.w-guide-text.right{
+  top: 0;
+  left: calc(100% + 10px);
+}
+.w-guide-text.bottom{
+  top: calc(100% + 10px);
+}
+.w-guide-text.top{
+  bottom: calc(100% + 10px);
+}
+
+@keyframes tapClick {
+  50% {
+    transform: translate(-50%, -50%) scale(1.5, 1.5);
+    opacity: 0;
+  }
+  99% {
+    transform: translate(-50%, -50%) scale(0.001, 0.001);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(0.001, 0.001);
+    opacity: 1;
+  }
+}

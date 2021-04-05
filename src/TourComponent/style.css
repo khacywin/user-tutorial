@@ -1,0 +1,103 @@
+.w-guide-tour-cp{
+  background-color: #fff;
+  border-radius: 5px;
+  color: #1a1a1a;
+  max-width: 300px;
+  padding: 12px 15px;
+  position: absolute;
+  text-align: left;
+  width: max-content;
+  z-index: 15;
+}
+.w-guide-tour-cp:after{
+  content: '';
+  height: 0;
+  position: absolute;
+  width: 0;
+}
+
+.w-guide-tour-cp.left{
+  top: 0;
+  right: calc(100% + 10px);
+}
+.w-guide-tour-cp.left:after{
+  border-bottom: 10px solid transparent;  
+  border-left:10px solid #fff;
+  border-top: 10px solid transparent;
+  right: -10px;
+  top: 5px;
+}
+
+.w-guide-tour-cp.right{
+  top: 0;
+  left: calc(100% + 10px);
+}
+.w-guide-tour-cp.right:after{
+  border-bottom: 10px solid transparent; 
+  border-right:10px solid #fff;
+  border-top: 10px solid transparent;
+  left: -10px;
+  top: 5px;
+}
+
+.w-guide-tour-cp.bottom{
+  top: calc(100% + 10px);
+  left: 0;
+}
+.w-guide-tour-cp.bottom:after{
+  border-bottom: 10px solid #fff;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  left: 10px;
+  top: -10px;
+}
+
+.w-guide-tour-cp.top{
+  bottom: calc(100% + 10px);
+  left: 0;
+}
+.w-guide-tour-cp.top:after{
+  border-left: 0px solid transparent;
+  border-right: 0px solid transparent;
+  border-top: 0px solid #fff;
+  bottom: -10px;
+  left: 10px;
+}
+
+.w-guide-tour-title {
+  font-weight: 600;
+}
+
+.w-guide-tour-message {
+  margin-top: 10px;
+  opacity: 0.8;
+}
+
+.w-guide-tour-footer {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 12px;
+}
+
+.w-guide-tour-step {
+  font-size: 90%;
+  font-style: italic;
+  opacity: 0.5;
+}
+
+.w-guide-tour-next {
+  background-color: #22402F;
+  border-radius: 3px;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  margin-left: 20px;
+  opacity: 0.7;
+  outline: 0;
+  padding: 5px 8px;
+  transition: opacity 0.2s;
+}
+.w-guide-tour-next:hover{
+  opacity: 1;
+}
