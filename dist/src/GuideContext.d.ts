@@ -2,7 +2,7 @@ import React from "react";
 export interface IGuide {
     step: number;
     run: boolean;
-    nextStep?: () => {};
+    nextStep?: any;
     mode?: "tour" | "action-driven";
     total?: number;
     setStep: any;
@@ -14,7 +14,4 @@ interface IGuideProvider {
     value?: Partial<IGuide>;
     children?: any;
 }
-export declare const GuideProvider: {
-    ({ value, children }: IGuideProvider): JSX.Element;
-    parameters: any;
-};
+export declare function GuideProvider({ value, children }: IGuideProvider): JSX.Element;

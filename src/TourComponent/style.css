@@ -9,59 +9,25 @@
   width: max-content;
   z-index: 15;
 }
-.w-guide-tour-cp:after{
-  content: '';
-  height: 0;
-  position: absolute;
-  width: 0;
-}
 
 .w-guide-tour-cp.left{
   top: 0;
   right: calc(100% + 10px);
-}
-.w-guide-tour-cp.left:after{
-  border-bottom: 10px solid transparent;  
-  border-left:10px solid #fff;
-  border-top: 10px solid transparent;
-  right: -10px;
-  top: 5px;
 }
 
 .w-guide-tour-cp.right{
   top: 0;
   left: calc(100% + 10px);
 }
-.w-guide-tour-cp.right:after{
-  border-bottom: 10px solid transparent; 
-  border-right:10px solid #fff;
-  border-top: 10px solid transparent;
-  left: -10px;
-  top: 5px;
-}
 
 .w-guide-tour-cp.bottom{
   top: calc(100% + 10px);
   left: 0;
 }
-.w-guide-tour-cp.bottom:after{
-  border-bottom: 10px solid #fff;
-  border-left: 10px solid transparent;
-  border-right: 10px solid transparent;
-  left: 10px;
-  top: -10px;
-}
 
 .w-guide-tour-cp.top{
   bottom: calc(100% + 10px);
   left: 0;
-}
-.w-guide-tour-cp.top:after{
-  border-left: 0px solid transparent;
-  border-right: 0px solid transparent;
-  border-top: 0px solid #fff;
-  bottom: -10px;
-  left: 10px;
 }
 
 .w-guide-tour-title {
@@ -100,4 +66,50 @@
 }
 .w-guide-tour-next:hover{
   opacity: 1;
+}
+
+.w-guide-tour-arrow{
+  position: relative;
+}
+.w-guide-tour-arrow:after{
+  content: '';
+  height: 0;
+  position: absolute;
+  width: 0;
+}
+
+.w-guide-tour-arrow.left:after{
+  border-bottom: 6px solid transparent;  
+  border-left:10px solid #fff;
+  border-top: 6px solid transparent;
+  left: -10px;
+  top: 50%;
+  transform: translate(0, -50%);
+}
+
+.w-guide-tour-arrow.right:after{
+  border-bottom: 6px solid transparent; 
+  border-right:10px solid #fff;
+  border-top: 6px solid transparent;
+  right: -10px;
+  top: 50%;
+  transform: translate(0, -50%);
+}
+
+.w-guide-tour-arrow.bottom:after{
+  border-bottom: 10px solid #fff;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  left: 50%;
+  bottom: -10px;
+  transform: translate(-50%, 0);
+}
+
+.w-guide-tour-arrow.top:after{
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 10px solid #fff;
+  left: 50%;
+  top: -10px;
+  transform: translate(-50%, 0);
 }

@@ -1,11 +1,9 @@
 import "./style.css";
 
-import React, {
-  useContext,
-} from "react";
+import GuideContext, { GuideProvider, IGuide } from "./GuideContext";
+import React, { useContext } from "react";
 
 import ActionDrivenComponent from "./ActionDrivenComponent";
-import GuideContext from "./GuideContext";
 import TourComponent from "./TourComponent";
 
 interface Props {
@@ -27,3 +25,5 @@ export default function (props: Props) {
     <TourComponent {...props} />
   );
 }
+
+export { GuideContext, GuideProvider, IGuide };

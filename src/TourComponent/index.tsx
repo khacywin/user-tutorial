@@ -19,12 +19,8 @@ export default function ({
   title,
   message,
 }: Props) {
-  const { run, step: stepContext, setStep, total } = useContext(GuideContext);
+  const { run, step: stepContext, nextStep, total } = useContext(GuideContext);
   const [active, setActive] = useState(false);
-
-  const _onClick = useCallback(() => {
-    setStep(stepContext + 1);
-  }, [stepContext]);
 
   const _preventClickEvent = useCallback((e: React.MouseEvent) => {
     e.stopPropagation();
@@ -57,7 +53,7 @@ export default function ({
                   <div className="w-guide-tour-step">
                     Step <strong>{step}</strong>/{total}
                   </div>
-                  <button className="w-guide-tour-next" onClick={_onClick}>
+                  <button className="w-guide-tour-next" onClick={nextStep}>
                     {step === total ? 'Finish' : 'Next'}
                   </button>
                 </div>
@@ -65,7 +61,7 @@ export default function ({
             </>
           ),
           onClick: () => {},
-          className: children.props.className + " w-guide-relative",
+          className: children.props.className + ` w-guide-tour-arrow ${position} w-guide-relative`,
         })}
       </div>
     </div>

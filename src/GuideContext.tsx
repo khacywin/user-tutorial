@@ -1,11 +1,9 @@
 import React, { createContext, useState } from "react";
 
-let step = 1;
-
 export interface IGuide {
   step: number;
   run: boolean;
-  nextStep?: () => {};
+  nextStep?: any;
   mode?: "tour" | "action-driven";
   total?: number;
   setStep: any;
@@ -13,11 +11,11 @@ export interface IGuide {
 }
 
 const GuideContext = createContext<IGuide>({
-  step: step,
-  total: step,
+  step: 1,
+  total: 1,
   run: true,
   mode: "action-driven",
-  nextStep: () => ++step,
+  nextStep: () => {},
   setStep: () => {},
   setTotal: () => {},
 });
@@ -31,10 +29,14 @@ interface IGuideProvider {
 export function GuideProvider({ value, children }: IGuideProvider) {
   const [step, setStep] = useState(1);
   const [total, setTotal] = useState(1);
+  
+  const nextStep = () => setStep(step + 1);
+
   const defaultValue: IGuide = {
     step,
     setStep,
     setTotal,
+    nextStep,
     run: true,
     total,
     mode: "action-driven",

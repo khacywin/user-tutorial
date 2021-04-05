@@ -1,5 +1,6 @@
 /// <reference types="react" />
 import "./style.css";
+import GuideContext, { GuideProvider, IGuide } from "./GuideContext";
 interface Props {
     children: JSX.Element;
     message?: string;
@@ -10,4 +11,4 @@ interface Props {
     type?: "button" | "input";
 }
 export default function (props: Props): JSX.Element;
-export {};
+export { GuideContext, GuideProvider, IGuide };

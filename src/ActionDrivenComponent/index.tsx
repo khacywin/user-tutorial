@@ -27,7 +27,6 @@ export default function ({
 }: Props) {
   const { run, step: stepContext, setStep } = useContext(GuideContext);
   const [active, setActive] = useState(false);
-  const refChildren = useRef<HTMLDivElement>();
 
   const _onClickCapture = useCallback(() => {
     setStep(stepContext + 1);
@@ -47,7 +46,6 @@ export default function ({
       <div className="w-guide-mark" />
       <div
         className="w-guide-wrap"
-        ref={refChildren}
         onClickCapture={_onClickCapture}
       >
         {React.cloneElement(children, {
