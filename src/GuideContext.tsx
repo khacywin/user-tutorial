@@ -1,23 +1,25 @@
 import React, { createContext, useState } from "react";
 
 export interface IGuide {
-  step: number;
-  run: boolean;
-  nextStep?: any;
   mode?: "tour" | "action-driven";
-  total?: number;
+  nextStep?: any;
+  previousStep?: any;
+  run: boolean;
   setStep: any;
   setTotal?: any;
+  step: number;
+  total?: number;
 }
 
 const GuideContext = createContext<IGuide>({
-  step: 1,
-  total: 1,
-  run: true,
   mode: "action-driven",
   nextStep: () => {},
+  previousStep: () => {},
+  run: true,
   setStep: () => {},
   setTotal: () => {},
+  step: 1,
+  total: 1,
 });
 
 export default GuideContext;
@@ -31,15 +33,17 @@ export function GuideProvider({ value, children }: IGuideProvider) {
   const [total, setTotal] = useState(1);
   
   const nextStep = () => setStep(step + 1);
+  const previousStep = () => setStep(step - 1);
 
   const defaultValue: IGuide = {
-    step,
+    mode: "action-driven",
+    nextStep,
+    previousStep,
+    run: true,
     setStep,
     setTotal,
-    nextStep,
-    run: true,
+    step,
     total,
-    mode: "action-driven",
   };
 
   return (
