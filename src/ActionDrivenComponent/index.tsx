@@ -27,6 +27,7 @@ export default function ({
 }: Props) {
   const { run, step: stepContext, setStep } = useContext(GuideContext);
   const [active, setActive] = useState(false);
+  const refChildren = useRef<HTMLDivElement>();
 
   const _onClickCapture = useCallback(() => {
     setStep(stepContext + 1);
@@ -41,10 +42,23 @@ export default function ({
     setActive(run && step === stepContext);
   }, [stepContext, run, step]);
 
+  useEffect(() => {
+    if (type === "input") {
+      const ele = refChildren.current?.getElementsByTagName("input")?.[0];
+      ele?.focus();
+      ele?.addEventListener("blur", (e: any) => {
+        if (e.target.value) {
+          setStep(stepContext + 1);
+        }
+      });
+    }
+  });
+
   return active ? (
     <div className="w-guide">
       <div className="w-guide-mark" />
       <div
+        ref={refChildren}
         className="w-guide-wrap"
         onClickCapture={_onClickCapture}
       >
@@ -52,14 +66,21 @@ export default function ({
           children: (
             <>
               {children.props.children}
-              <div className={`w-guide-text ${position}`} onClick={_preventClickEvent}>
+              <div
+                className={`w-guide-text ${position}`}
+                onClick={_preventClickEvent}
+              >
                 {text}
               </div>
             </>
           ),
           className:
             children.props.className +
-            (type === "button" ? " w-guide-tap-click" : type === 'input' ? " w-guide-input" : " "),
+            (type === "button"
+              ? " w-guide-tap-click"
+              : type === "input"
+              ? " w-guide-input"
+              : " "),
         })}
       </div>
     </div>
