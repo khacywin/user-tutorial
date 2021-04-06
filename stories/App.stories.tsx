@@ -53,40 +53,58 @@ export const TourComponent = () => {
   }
 
   return (
-    <GuideProvider value={{ mode: "tour", total: 3 }}>
-      <Guide
-        step={1}
-        title="Step 1"
-        message="This is message"
-        position="bottom"
+    <div
+      style={{
+        height: "70px",
+        overflow: "hidden",
+        background: "red",
+        padding: "10px",
+      }}
+    >
+      <GuideProvider value={{ mode: "tour", total: 3 }}>
+        <Guide
+          step={1}
+          title="Step 1"
+          message="This is message"
+          position="bottom"
+        >
+          <button className="step" onClick={_alert}>
+            Step 1
+          </button>
+        </Guide>
+        <Guide
+          step={2}
+          title="Step 2"
+          message="This is message"
+          position="bottom"
+        >
+          <button className="step" onClick={_alert}>
+            Step 2
+          </button>
+        </Guide>
+        <Guide
+          step={3}
+          title="Step 3"
+          message="This is message"
+          position="bottom"
+        >
+          <button className="step" onClick={_alert}>
+            Step 3
+          </button>
+        </Guide>
+      </GuideProvider>
+      <div
+        style={{
+          height: "100px",
+          background: "blue",
+          marginTop: "10px",
+          color: "#fff",
+          padding: '10px'
+        }}
       >
-        <button className="step" onClick={_alert}>
-          Step 1
-        </button>
-      </Guide>
-      <Guide
-        step={2}
-        title="Step 2"
-        message="This is message"
-        position="bottom"
-      >
-        <button className="step" onClick={_alert}>
-          {" "}
-          Step 2
-        </button>
-      </Guide>
-      <Guide
-        step={3}
-        title="Step 3"
-        message="This is message"
-        position="bottom"
-      >
-        <button className="step" onClick={_alert}>
-          {" "}
-          Step 3
-        </button>
-      </Guide>
-    </GuideProvider>
+        Be overflowed
+      </div>
+    </div>
   );
 };
 
