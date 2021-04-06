@@ -92,7 +92,7 @@ export const TourComponent = () => {
 
 export const TourComponentRight = () => {
   return (
-    <GuideProvider value={{ mode: "tour", total: 3, run: false }}>
+    <GuideProvider value={{ mode: "tour", total: 3 }}>
       <div className="column">
         <Guide
           step={1}

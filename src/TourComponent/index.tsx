@@ -26,8 +26,10 @@ export default function ({
   message,
 }: Props) {
   const refChildren = useRef<HTMLDivElement>(null);
-  const { run, step: stepContext, nextStep, total } = useContext(GuideContext);
+  const { run, step: stepContext, nextStep, total, setStep } = useContext(GuideContext);
   const [active, setActive] = useState(false);
+
+  const _skip = () => setStep(0);
 
   const _preventClickEvent = useCallback((e: React.MouseEvent) => {
     e.stopPropagation();
@@ -68,6 +70,9 @@ export default function ({
                   <div className="w-guide-tour-step">
                     Step <strong>{step}</strong>/{total}
                   </div>
+                  <button className="w-guide-tour-skip" onClick={_skip}>
+                    Skip
+                  </button>
                   <button className="w-guide-tour-next" onClick={nextStep}>
                     {step === total ? "Finish" : "Next"}
                   </button>
