@@ -1,3 +1,57 @@
+.w-guide-text {
+  color: #fff;
+  height: max-content;
+  max-width: 50vw;
+  padding: 10px;
+  pointer-events: none;
+  position: absolute;
+  user-select: none;
+  width: max-content;
+  z-index: 10;
+  display: flex;
+}
+.w-guide-text.left {
+  top: 0;
+  right: calc(100% + 10px);
+  flex-direction: row-reverse;
+}
+.w-guide-text.right {
+  top: 0;
+  left: calc(100% + 10px);
+}
+.w-guide-text.bottom {
+  top: calc(100% + 10px);
+}
+.w-guide-text.top {
+  bottom: calc(100% + 10px);
+}
+.w-guide-text img {
+  display: block;
+  width: auto;
+  height: 60px;
+  -webkit-filter: invert(100%) sepia(100%) saturate(1%) hue-rotate(194deg)
+    brightness(109%) contrast(101%); /* Safari 6.0 - 9.0 */
+  filter: invert(100%) sepia(100%) saturate(1%) hue-rotate(194deg)
+    brightness(109%) contrast(101%);
+}
+.w-guide-text.right img {
+  transform: rotate(-19deg) translate(-13px, 3px);
+}
+.w-guide-text.left img {
+  transform: rotateX(211deg) translate(10px, 9px);
+}
+.w-guide-text.top img {
+  transform: rotateX(178deg) translate(0, -7px);
+}
+.w-guide-text div {
+  max-width: 300px;
+  width: max-content;
+  align-self: flex-end;
+}
+.w-guide-text.top div {
+  align-self: flex-start;
+}
+
 .w-guide-tap-click {
   position: relative;
 }
@@ -15,32 +69,6 @@
   top: 50%;
   transform: translate(-50%, -50%) scale(0);
   width: 120%;
-}
-
-.w-guide-text {
-  color: #fff;
-  height: max-content;
-  max-width: 50vw;
-  padding: 10px;
-  pointer-events: none;
-  position: absolute;
-  user-select: none;
-  width: max-content;
-  z-index: 10;
-}
-.w-guide-text.left {
-  top: 0;
-  right: calc(100% + 10px);
-}
-.w-guide-text.right {
-  top: 0;
-  left: calc(100% + 10px);
-}
-.w-guide-text.bottom {
-  top: calc(100% + 10px);
-}
-.w-guide-text.top {
-  bottom: calc(100% + 10px);
 }
 
 .w-guide-input {

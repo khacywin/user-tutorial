@@ -12,3 +12,7 @@
   display: flex;
   flex-direction: column;
 }
+
+.action-driven .left{
+  margin-left: 200px;
+}

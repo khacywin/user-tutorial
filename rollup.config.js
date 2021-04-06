@@ -1,4 +1,5 @@
 import postcss from "rollup-plugin-postcss";
+import svg from "rollup-plugin-svg";
 import typescript from "rollup-plugin-typescript2";
 
 const packageJson = require("./package.json");
@@ -20,5 +21,6 @@ export default {
   plugins: [
     typescript({ useTsconfigDeclarationDir: true }),
     postcss(),
+    svg()
   ]
 };

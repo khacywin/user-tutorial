@@ -9,6 +9,7 @@ import React, {
 } from "react";
 
 import GuideContext from "./../GuideContext";
+import icon from './../guide.svg';
 
 interface Props {
   children: JSX.Element;
@@ -70,7 +71,8 @@ export default function ({
                 className={`w-guide-text ${position}`}
                 onClick={_preventClickEvent}
               >
-                {text}
+                <img src={icon}/>
+                <div>{text}</div>
               </div>
             </>
           ),
