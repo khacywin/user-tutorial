@@ -9,7 +9,7 @@ import TourComponent from "./TourComponent";
 interface Props {
   children: JSX.Element;
   message?: string;
-  position?: "left" | "right" | "top" | "bottom";
+  position?: ("left" | "right" | "top" | "bottom")[];
   step: number;
   text?: string;
   title?: string;

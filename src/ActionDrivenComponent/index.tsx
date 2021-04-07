@@ -1,7 +1,6 @@
 import "./style.css";
 
 import React, {
-  useCallback,
   useContext,
   useEffect,
   useRef,
@@ -13,7 +12,7 @@ import icon from "./../guide.svg";
 
 interface Props {
   children: JSX.Element;
-  position?: "left" | "right" | "top" | "bottom";
+  position?: ("left" | "right" | "top" | "bottom")[];
   step: number;
   text?: string;
   type?: "button" | "input";
@@ -21,25 +20,22 @@ interface Props {
 
 export default function ({
   children,
-  position = "bottom",
+  position = ["bottom", "left"],
   step,
   text,
   type = "button",
 }: Props) {
-  const { run, step: stepContext, setStep } = useContext(GuideContext);
+  const { run, step: stepContext, setStep, nextStep } = useContext(
+    GuideContext
+  );
   const [active, setActive] = useState(false);
   const refChildren = useRef<HTMLDivElement>();
 
-  const _skip = () => setStep(0);
-  
-  const _onClickCapture = useCallback(() => {
-    setStep(stepContext + 1);
-  }, [stepContext]);
-
-  const _preventClickEvent = useCallback((e: React.MouseEvent) => {
-    e.stopPropagation();
+  const _skip = (e: React.MouseEvent) => {
     e.preventDefault();
-  }, []);
+    e.stopPropagation();
+    setStep(0);
+  };
 
   useEffect(() => {
     setActive(run && step === stepContext);
@@ -60,25 +56,28 @@ export default function ({
   return active ? (
     <div className="w-guide">
       <div className="w-guide-mark" />
-      <div
-        ref={refChildren}
-        className="w-guide-wrap"
-        onClickCapture={_onClickCapture}
-      >
+      <div ref={refChildren} className="w-guide-wrap">
         {React.cloneElement(children, {
           children: (
             <>
               {children.props.children}
-              <div
-                className={`w-guide-text ${position}`}
-                onClickCapture={_preventClickEvent}
-              >
+              <div className={`w-guide-text ${position.join(" ")}`}>
                 <img src={icon} />
-                <div>{text}</div>
-                <button onClick={_skip}>Skip</button>
+                <div className="w-guide-container">
+                  <div>{text}</div>
+                  <button onClick={_skip}>Skip</button>
+                </div>
               </div>
             </>
           ),
+          onClick: (e: any) => {
+            if (
+              !(e.target?.offsetParent?.className.indexOf("w-guide-text") >= 0)
+            ) {
+              children.props.onClick(e);
+              nextStep();
+            }
+          },
           className:
             children.props.className +
             (type === "button"

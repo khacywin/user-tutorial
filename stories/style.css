@@ -1,3 +1,17 @@
+.column {
+  display: flex;
+  flex-direction: column;
+}
+
+.button-control {
+  display: block;
+  position: fixed;
+  z-index: 100;
+  top: 500px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
 .step{
   background-color: #fff;
   border: none;
@@ -8,11 +22,58 @@
   width: 100px;
 }
 
-.column {
-  display: flex;
-  flex-direction: column;
+.action-driven {
+  width: 400px;
+  height: 400px;
+  position: relative;
+  margin: 10px auto;
 }
 
-.action-driven .left{
-  margin-left: 200px;
+.action-driven .step{
+  position: absolute;
+  margin-left: 0;
+}
+
+.action-driven .step.bottom-right{
+  top: 0;
+  left: 0;
+}
+
+.action-driven .step.right{
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+}
+
+.action-driven .step.top-right{
+  bottom: 0;
+  left: 0;
+}
+
+.action-driven .step.top{
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.action-driven .step.top-left{
+  bottom: 0;
+  right: 0;
+}
+
+.action-driven .step.left{
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.action-driven .step.bottom-left{
+  top: 0;
+  right: 0;
+}
+
+.action-driven .step.bottom{
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
 }

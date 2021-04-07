@@ -2,7 +2,7 @@
 import "./style.css";
 interface Props {
     children: JSX.Element;
-    position?: "left" | "right" | "top" | "bottom";
+    position?: ("left" | "right" | "top" | "bottom")[];
     step: number;
     text?: string;
     type?: "button" | "input";

@@ -12,7 +12,7 @@ import GuideContext from "./../GuideContext";
 
 interface Props {
   children: JSX.Element;
-  position?: "left" | "right" | "top" | "bottom";
+  position?: ("left" | "right" | "top" | "bottom")[];
   step: number;
   title?: string;
   message?: string;
@@ -20,7 +20,7 @@ interface Props {
 
 export default function ({
   children,
-  position = "bottom",
+  position = ["bottom", "left"],
   step,
   title,
   message,
@@ -59,7 +59,7 @@ export default function ({
               {children.props.children}
               <div
                 ref={refChildren}
-                className={`w-guide-tour-cp ${position}`}
+                className={`w-guide-tour-cp ${position.join(" ")}`}
                 onClick={_preventClickEvent}
               >
                 {title && <div className="w-guide-tour-title">{title}</div>}
@@ -83,7 +83,7 @@ export default function ({
           onClick: () => {},
           className:
             children.props.className +
-            ` w-guide-tour-arrow ${position} w-guide-relative`,
+            ` w-guide-tour-arrow ${position.join(" ")} w-guide-relative`,
         })}
       </div>
     </div>
