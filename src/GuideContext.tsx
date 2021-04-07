@@ -49,7 +49,7 @@ export function GuideProvider({ value, children }: IGuideProvider) {
       step,
       total,
     }),
-    [value?.step]
+    [nextStep, previousStep]
   );
 
   return (

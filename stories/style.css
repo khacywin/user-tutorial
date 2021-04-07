@@ -12,7 +12,7 @@
   transform: translateX(-50%);
 }
 
-.step{
+.step {
   background-color: #fff;
   border: none;
   color: #000;
@@ -29,51 +29,83 @@
   margin: 10px auto;
 }
 
-.action-driven .step{
+.action-driven .step {
   position: absolute;
   margin-left: 0;
 }
 
-.action-driven .step.bottom-right{
+.action-driven .step.bottom-right {
   top: 0;
   left: 0;
 }
 
-.action-driven .step.right{
+.action-driven .step.right {
   top: 50%;
   left: 0;
   transform: translateY(-50%);
 }
 
-.action-driven .step.top-right{
+.action-driven .step.top-right {
   bottom: 0;
   left: 0;
 }
 
-.action-driven .step.top{
+.action-driven .step.top {
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
 }
 
-.action-driven .step.top-left{
+.action-driven .step.top-left {
   bottom: 0;
   right: 0;
 }
 
-.action-driven .step.left{
+.action-driven .step.left {
   right: 0;
   top: 50%;
   transform: translateY(-50%);
 }
 
-.action-driven .step.bottom-left{
+.action-driven .step.bottom-left {
   top: 0;
   right: 0;
 }
 
-.action-driven .step.bottom{
+.action-driven .step.bottom {
   left: 50%;
   top: 0;
   transform: translateX(-50%);
+}
+
+.tour-position {
+  width: 400px;
+  height: 400px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.tour-position .step {
+  position: absolute;
+  margin-left: 0;
+}
+
+.tour-position .step.top {
+  top: calc(50% - 40px);
+  left: 50%;
+}
+
+.tour-position .step.right {
+  top: 50%;
+  left: calc(50% + 150px);
+}
+
+.tour-position .step.bottom {
+  top: calc(50% + 40px);
+  left: 50%;
+}
+
+.tour-position .step.left {
+  top: 50%;
+  left: calc(50% - 150px);
 }

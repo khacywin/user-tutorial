@@ -1,7 +1,6 @@
 import "./style.css";
 
 import React, {
-  useCallback,
   useContext,
   useEffect,
   useRef,
@@ -25,16 +24,13 @@ export default function ({
   title,
   message,
 }: Props) {
-  const refChildren = useRef<HTMLDivElement>(null);
+  const refChildren = useRef<HTMLDivElement>();
   const { run, step: stepContext, nextStep, total, setStep } = useContext(GuideContext);
   const [active, setActive] = useState(false);
-
-  const _skip = () => setStep(0);
-
-  const _preventClickEvent = useCallback((e: React.MouseEvent) => {
-    e.stopPropagation();
-    e.preventDefault();
-  }, []);
+  
+  const _skip = () => {
+    setStep(0);
+  }
 
   useEffect(() => {
     setActive(run && step === stepContext);
@@ -60,7 +56,6 @@ export default function ({
               <div
                 ref={refChildren}
                 className={`w-guide-tour-cp ${position.join(" ")}`}
-                onClick={_preventClickEvent}
               >
                 {title && <div className="w-guide-tour-title">{title}</div>}
                 {message && (
@@ -68,7 +63,7 @@ export default function ({
                 )}
                 <div className="w-guide-tour-footer">
                   <div className="w-guide-tour-step">
-                    Step <strong>{step}</strong>/{total}
+                    Step <strong> {step} </strong> / {total}
                   </div>
                   <button className="w-guide-tour-skip" onClick={_skip}>
                     Skip
