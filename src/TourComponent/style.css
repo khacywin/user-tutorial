@@ -9,6 +9,7 @@
   width: max-content;
   height: max-content;
   z-index: 15;
+  visibility: hidden;
 }
 
 .w-guide-tour-cp.left{
@@ -44,13 +45,41 @@
   align-items: center;
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
   margin-top: 12px;
 }
 
 .w-guide-tour-step {
-  font-size: 90%;
-  font-style: italic;
-  opacity: 0.5;
+  width: 100%;
+  min-width: 200px;
+  max-width: 300px;
+  margin-top: 14px;
+  display: flex;
+}
+
+.w-guide-tour-step div{
+  border-radius: 50%;
+  height: 6px;
+  width: 6px;
+  border: 1px solid #d3d3d3;
+  margin-right: 10px;
+}
+
+.w-guide-tour-step .active{
+  border-color: transparent;
+  background-color: #22402F;
+  transform: translateX(0) scale(1.5);
+  animation: stepAni 0.4s linear;
+  animation-delay: 0.2s;
+}
+
+@keyframes stepAni {
+  0%{
+    transform: scale(1) translateX(-16px);
+  }
+  100%{
+    transform: scale(1.5) translateX(0);
+  }
 }
 
 .w-guide-tour-next {
@@ -59,7 +88,6 @@
   border: none;
   color: #fff;
   cursor: pointer;
-  margin-left: 5px;
   opacity: 0.7;
   outline: 0;
   padding: 5px 8px;
@@ -76,7 +104,6 @@
   color: #1a1a1a;
   cursor: pointer;
   font-style: italic;
-  margin-left: 20px;
   opacity: 0.7;
   outline: 0;
   padding: 5px 8px;

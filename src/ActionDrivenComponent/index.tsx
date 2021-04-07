@@ -65,7 +65,7 @@ export default function ({
                 <img src={icon} />
                 <div className="w-guide-container">
                   <div>{text}</div>
-                  <button onClick={_skip}>Skip</button>
+                  <button className="w-guide-skip" onClick={_skip}>Skip all</button>
                 </div>
               </div>
             </>

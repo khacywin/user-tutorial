@@ -1,8 +1,10 @@
 import "./style.css";
 
 import React, {
+  useCallback,
   useContext,
   useEffect,
+  useMemo,
   useRef,
   useState,
 } from "react";
@@ -25,12 +27,25 @@ export default function ({
   message,
 }: Props) {
   const refChildren = useRef<HTMLDivElement>();
-  const { run, step: stepContext, nextStep, total, setStep } = useContext(GuideContext);
+  const { run, step: stepContext, nextStep, total, setStep } = useContext(
+    GuideContext
+  );
   const [active, setActive] = useState(false);
-  
+
   const _skip = () => {
     setStep(0);
-  }
+  };
+
+  const _renderStep = useMemo(() => {
+    let html: any = [];
+    for (let i = 1; i <= total; i++) {
+      html.push(
+        <div key={i} className={stepContext === i ? "active" : ""} />
+      );
+    }
+
+    return html;
+  }, [total, stepContext]);
 
   useEffect(() => {
     setActive(run && step === stepContext);
@@ -39,9 +54,10 @@ export default function ({
   useEffect(() => {
     if (refChildren.current) {
       const bounding = refChildren?.current?.getBoundingClientRect();
-      refChildren.current.style.position = 'fixed';
-      refChildren.current.style.top = bounding.top + 'px';
-      refChildren.current.style.left = bounding.left + 'px';
+      refChildren.current.style.position = "fixed";
+      refChildren.current.style.top = bounding.top + "px";
+      refChildren.current.style.left = bounding.left + "px";
+      refChildren.current.style.visibility = 'initial';
     }
   });
 
@@ -62,15 +78,15 @@ export default function ({
                   <div className="w-guide-tour-message">{message}</div>
                 )}
                 <div className="w-guide-tour-footer">
-                  <div className="w-guide-tour-step">
-                    Step <strong> {step} </strong> / {total}
-                  </div>
                   <button className="w-guide-tour-skip" onClick={_skip}>
                     Skip
                   </button>
                   <button className="w-guide-tour-next" onClick={nextStep}>
                     {step === total ? "Finish" : "Next"}
                   </button>
+                </div>
+                <div className="w-guide-tour-step">
+                  {_renderStep && _renderStep.map((ele: any) => ele)}
                 </div>
               </div>
             </>
