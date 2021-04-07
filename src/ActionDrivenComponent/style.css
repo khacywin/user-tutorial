@@ -3,11 +3,9 @@
   height: max-content;
   max-width: 50vw;
   padding: 10px;
-  pointer-events: none;
   position: absolute;
-  user-select: none;
   width: max-content;
-  z-index: 10;
+  z-index: 15;
   display: flex;
 }
 .w-guide-text.left {
@@ -47,9 +45,29 @@
   max-width: 300px;
   width: max-content;
   align-self: flex-end;
+  pointer-events: none;
+  user-select: none;
 }
 .w-guide-text.top div {
   align-self: flex-start;
+}
+
+.w-guide-text button {
+  background-color: transparent;
+  border-radius: 3px;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  font-style: italic;
+  margin-left: 20px;
+  opacity: 0.7;
+  outline: 0;
+  padding: 5px 8px;
+  transition: opacity 0.2s;
+  cursor: pointer;
+}
+.w-guide-text button:hover {
+  opacity: 1;
 }
 
 .w-guide-tap-click {

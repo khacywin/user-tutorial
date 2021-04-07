@@ -9,7 +9,7 @@ import React, {
 } from "react";
 
 import GuideContext from "./../GuideContext";
-import icon from './../guide.svg';
+import icon from "./../guide.svg";
 
 interface Props {
   children: JSX.Element;
@@ -30,6 +30,8 @@ export default function ({
   const [active, setActive] = useState(false);
   const refChildren = useRef<HTMLDivElement>();
 
+  const _skip = () => setStep(0);
+  
   const _onClickCapture = useCallback(() => {
     setStep(stepContext + 1);
   }, [stepContext]);
@@ -69,10 +71,11 @@ export default function ({
               {children.props.children}
               <div
                 className={`w-guide-text ${position}`}
-                onClick={_preventClickEvent}
+                onClickCapture={_preventClickEvent}
               >
-                <img src={icon}/>
+                <img src={icon} />
                 <div>{text}</div>
+                <button onClick={_skip}>Skip</button>
               </div>
             </>
           ),
