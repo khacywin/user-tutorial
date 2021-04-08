@@ -1,11 +1,6 @@
 import "./style.css";
 
-import React, {
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 
 import GuideContext from "./../GuideContext";
 import icon from "./../guide.svg";
@@ -24,14 +19,14 @@ export default function ({
   step,
   text,
   type = "button",
-}: Props) {
+}: Props): React.FunctionComponentElement<HTMLDivElement> {
   const { run, step: stepContext, setStep, nextStep } = useContext(
     GuideContext
   );
   const [active, setActive] = useState(false);
   const refChildren = useRef<HTMLDivElement>();
 
-  const _skip = (e: React.MouseEvent) => {
+  const _skip = (e: React.MouseEvent): void => {
     e.preventDefault();
     e.stopPropagation();
     setStep(0);
@@ -43,15 +38,25 @@ export default function ({
 
   useEffect(() => {
     if (type === "input") {
-      const ele = refChildren.current?.getElementsByTagName("input")?.[0];
+      const ele: HTMLInputElement = refChildren.current?.getElementsByTagName(
+        "input"
+      )?.[0];
       ele?.focus();
-      ele?.addEventListener("blur", (e: any) => {
+      ele?.addEventListener("blur", (e: any): void => {
         if (e.target.value) {
           setStep(stepContext + 1);
         }
       });
+
+      return (): void => {
+        ele.removeEventListener("blur", (e: any) => {
+          if (e.target.value) {
+            setStep(stepContext + 1);
+          }
+        });
+      };
     }
-  });
+  }, []);
 
   return active ? (
     <div className="w-guide">
@@ -65,7 +70,9 @@ export default function ({
                 <img src={icon} />
                 <div className="w-guide-container">
                   <div>{text}</div>
-                  <button className="w-guide-skip" onClick={_skip}>Skip all</button>
+                  <button className="w-guide-skip" onClick={_skip}>
+                    Skip all
+                  </button>
                 </div>
               </div>
             </>

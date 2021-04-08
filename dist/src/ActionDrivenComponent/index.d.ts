@@ -1,5 +1,5 @@
-/// <reference types="react" />
 import "./style.css";
+import React from "react";
 interface Props {
     children: JSX.Element;
     position?: ("left" | "right" | "top" | "bottom")[];
@@ -7,5 +7,5 @@ interface Props {
     text?: string;
     type?: "button" | "input";
 }
-export default function ({ children, position, step, text, type, }: Props): JSX.Element;
+export default function ({ children, position, step, text, type, }: Props): React.FunctionComponentElement<HTMLDivElement>;
 export {};

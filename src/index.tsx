@@ -16,7 +16,9 @@ interface Props {
   type?: "button" | "input";
 }
 
-export default function (props: Props) {
+export default function WGuide(
+  props: Props
+): React.FunctionComponentElement<HTMLDivElement> {
   const { mode } = useContext(GuideContext);
 
   return mode === "action-driven" ? (

@@ -1,6 +1,6 @@
-/// <reference types="react" />
 import "./style.css";
 import GuideContext, { GuideProvider, IGuide } from "./GuideContext";
+import React from "react";
 interface Props {
     children: JSX.Element;
     message?: string;
@@ -10,5 +10,5 @@ interface Props {
     title?: string;
     type?: "button" | "input";
 }
-export default function (props: Props): JSX.Element;
+export default function WGuide(props: Props): React.FunctionComponentElement<HTMLDivElement>;
 export { GuideContext, GuideProvider, IGuide };

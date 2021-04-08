@@ -5,7 +5,6 @@ import React, {
   useContext,
   useEffect,
   useMemo,
-  useRef,
   useState,
 } from "react";
 
@@ -25,23 +24,20 @@ export default function ({
   step,
   title,
   message,
-}: Props) {
-  const refChildren = useRef<HTMLDivElement>();
+}: Props): React.FunctionComponentElement<HTMLDivElement> {
   const { run, step: stepContext, nextStep, total, setStep } = useContext(
     GuideContext
   );
   const [active, setActive] = useState(false);
 
-  const _skip = () => {
+  const _skip = (): void => {
     setStep(0);
   };
 
   const _renderStep = useMemo(() => {
-    let html: any = [];
+    const html: JSX.Element[] = [];
     for (let i = 1; i <= total; i++) {
-      html.push(
-        <div key={i} className={stepContext === i ? "active" : ""} />
-      );
+      html.push(<div key={i} className={stepContext === i ? "active" : ""} />);
     }
 
     return html;
@@ -51,15 +47,15 @@ export default function ({
     setActive(run && step === stepContext);
   }, [stepContext, run, step]);
 
-  useEffect(() => {
-    if (refChildren.current) {
-      const bounding = refChildren?.current?.getBoundingClientRect();
-      refChildren.current.style.position = "fixed";
-      refChildren.current.style.top = bounding.top + "px";
-      refChildren.current.style.left = bounding.left + "px";
-      refChildren.current.style.visibility = 'initial';
+  const updateRef = useCallback((el: HTMLDivElement) => {
+    if (el) {
+      const bounding = el?.getBoundingClientRect();
+      el.style.position = "fixed";
+      el.style.top = bounding.top + "px";
+      el.style.left = bounding.left + "px";
+      el.style.visibility = "initial";
     }
-  });
+  }, []);
 
   return active ? (
     <div className="w-guide">
@@ -70,7 +66,7 @@ export default function ({
             <>
               {children.props.children}
               <div
-                ref={refChildren}
+                ref={updateRef}
                 className={`w-guide-tour-cp ${position.join(" ")}`}
               >
                 {title && <div className="w-guide-tour-title">{title}</div>}
@@ -86,12 +82,14 @@ export default function ({
                   </button>
                 </div>
                 <div className="w-guide-tour-step">
-                  {_renderStep && _renderStep.map((ele: any) => ele)}
+                  {_renderStep && _renderStep.map((ele: JSX.Element) => ele)}
                 </div>
               </div>
             </>
           ),
-          onClick: () => {},
+          onClick: (e: React.SyntheticEvent<unknown>): void => {
+            e.preventDefault();
+          },
           className:
             children.props.className +
             ` w-guide-tour-arrow ${position.join(" ")} w-guide-relative`,
