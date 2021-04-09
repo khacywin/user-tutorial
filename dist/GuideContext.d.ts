@@ -1,12 +1,13 @@
 import React from "react";
 export interface IGuide {
-    step: number;
-    run: boolean;
-    nextStep?: any;
     mode?: "tour" | "action-driven";
-    total?: number;
+    nextStep?: any;
+    previousStep?: any;
+    run: boolean;
     setStep: any;
     setTotal?: any;
+    step: number;
+    total?: number;
 }
 declare const GuideContext: React.Context<IGuide>;
 export default GuideContext;
