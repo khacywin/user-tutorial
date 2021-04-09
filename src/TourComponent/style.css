@@ -4,15 +4,14 @@
   color: #1a1a1a;
   max-width: 300px;
   padding: 12px 15px;
-  position: absolute;
+  position: fixed;
   text-align: left;
   width: max-content;
   height: max-content;
   z-index: 15;
-  visibility: hidden;
 }
 
-.w-guide-tour-cp.left{
+/* .w-guide-tour-cp.left{
   top: 0;
   right: calc(100% + 10px);
 }
@@ -30,7 +29,7 @@
 .w-guide-tour-cp.top{
   bottom: calc(100% + 10px);
   left: 0;
-}
+} */
 
 .w-guide-tour-title {
   font-weight: 600;
