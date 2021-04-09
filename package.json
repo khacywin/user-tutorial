@@ -1,7 +1,7 @@
 {
   "name": "w-guide",
   "version": "1.0.0",
-  "description": "React package",
+  "description": "React package about user dashboard",
   "main": "dist/index.js",
   "module": "dist/index.js",
   "scripts": {
@@ -16,9 +16,9 @@
   },
   "keywords": [
     "guide",
-    "first",
-    "time",
-    "react"
+    "first time",
+    "react",
+    "user dashboard"
   ],
   "author": "khacywin",
   "license": "ISC",
