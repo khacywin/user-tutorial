@@ -1,6 +1,6 @@
 import "./style.css";
 
-import GuideContext, { GuideProvider, IGuide } from "./GuideContext";
+import Context, { GuideProvider as Provider } from "./GuideContext";
 import React, { useContext } from "react";
 
 import ActionDrivenComponent from "./ActionDrivenComponent";
@@ -16,8 +16,8 @@ interface Props {
   type?: "button" | "input";
 }
 
-export default function (props: Props) {
-  const { mode } = useContext(GuideContext);
+export default function(props: Props) {
+  const { mode } = useContext(Context);
 
   return mode === "action-driven" ? (
     <ActionDrivenComponent {...props} />
@@ -26,4 +26,15 @@ export default function (props: Props) {
   );
 }
 
-export { GuideContext, GuideProvider, IGuide };
+export const GuideContext = Context;
+export const GuideProvider = Provider;
+export interface IGuide {
+  mode?: "tour" | "action-driven";
+  nextStep?: any;
+  previousStep?: any;
+  run: boolean;
+  setStep: any;
+  setTotal?: any;
+  step: number;
+  total?: number;
+};

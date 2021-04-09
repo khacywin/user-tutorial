@@ -20,8 +20,8 @@ export default function ({
   title,
   message,
 }: Props) {
-  const refChildren = useRef<any>();
-  const ref = useRef<any>();
+  const refChildren = useRef<any>(null);
+  const ref = useRef<any>(null);
   const { run, step: stepContext, nextStep, total, setStep } = useContext(
     GuideContext
   );
@@ -38,8 +38,9 @@ export default function ({
   };
 
   const _renderStep = useMemo(() => {
+    const _total = total || 0;
     let html: any = [];
-    for (let i = 1; i <= total; i++) {
+    for (let i = 1; i <= _total; i++) {
       html.push(<div key={i} className={stepContext === i ? "active" : ""} />);
     }
 

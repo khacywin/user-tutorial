@@ -2,8 +2,9 @@
   "compilerOptions": {
     "declaration": true,
     "declarationDir": "dist",
+    "target": "es5",
     "module": "ES2015",
-    "target": "ES6",
+    "strict": true,
     "sourceMap": true,
     "jsx": "react",
     "moduleResolution": "node",
@@ -11,14 +12,16 @@
       "node_modules/@types"
     ],
     "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true
+    "allowJs": true,
   },
   "include": [
     "src/**/*",
     "src/*.d.ts"
-, "stories", "stories"  ],
+  ],
   "exclude": [
     "node_modules",
+    "stories",
+    ".storybook",
     "build",
     "**/*.stories.tsx",
     "**/*.test.tsx"

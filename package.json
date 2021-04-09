@@ -2,8 +2,8 @@
   "name": "w-guide",
   "version": "1.0.0",
   "description": "React package about user dashboard",
-  "main": "dist/index.js",
-  "module": "dist/index.js",
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.esm.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "storybook": "start-storybook -p 6006",
@@ -28,25 +28,29 @@
   "homepage": "https://github.com/khacywin/w-guide#readme",
   "devDependencies": {
     "@babel/core": "^7.13.14",
+    "@rollup/plugin-commonjs": "^18.0.0",
+    "@rollup/plugin-node-resolve": "^11.2.1",
     "@storybook/addon-actions": "^6.2.2",
     "@storybook/addon-links": "^5.3.21",
     "@storybook/addons": "^5.3.21",
     "@storybook/react": "^6.2.2",
+    "@svgr/rollup": "^5.5.0",
     "@types/node": "^14.14.37",
     "@types/react": "^17.0.3",
+    "@types/react-dom": "^17.0.3",
     "babel-loader": "^8.2.2",
     "node-sass": "^4.14.1",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
+    "react": ">=16.8.0",
+    "react-dom": ">=16.8.0",
     "rollup": "^2.44.0",
     "rollup-plugin-postcss": "^4.0.0",
-    "rollup-plugin-svg": "^2.0.0",
     "rollup-plugin-typescript2": "^0.30.0",
+    "rollup-plugin-url": "^3.0.1",
     "ts-loader": "^8.1.0",
     "typescript": "^4.2.3"
   },
   "peerDependencies": {
-    "react": ">=16.8.0",
-    "react-dom": ">=16.8.0"
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
   }
 }

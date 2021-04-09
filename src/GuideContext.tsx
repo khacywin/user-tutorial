@@ -29,14 +29,14 @@ interface IGuideProvider {
   children?: any;
 }
 
-export function GuideProvider({ value, children }: IGuideProvider) {
+export function GuideProvider({ value = {}, children }: IGuideProvider) {
   const [step, setStep] = useState(1);
   const [total, setTotal] = useState(1);
 
   const nextStep = () =>
-    value.setStep ? value?.setStep(value?.step + 1) : setStep(step + 1);
+    value.setStep && value.step ? value.setStep(value.step + 1) : setStep(step + 1);
   const previousStep = () =>
-    value.setStep ? value?.setStep(value?.step - 1) : setStep(step - 1);
+    value.setStep && value.step ? value.setStep(value.step - 1) : setStep(step - 1);
 
   const defaultValue: IGuide = useMemo(
     () => ({

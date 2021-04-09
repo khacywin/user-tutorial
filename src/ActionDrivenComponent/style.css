@@ -43,7 +43,7 @@
   flex-direction: row-reverse;
 }
 .w-guide-text.left img {
-  transform: rotateX(205deg) rotateZ(342deg) translate(10px, 15px);
+  transform: rotate(-72deg) translate(4px, 15px);
 }
 
 .w-guide-text.top {

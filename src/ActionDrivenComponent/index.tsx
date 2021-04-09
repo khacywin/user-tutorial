@@ -29,7 +29,7 @@ export default function ({
     GuideContext
   );
   const [active, setActive] = useState(false);
-  const refChildren = useRef<HTMLDivElement>();
+  const refChildren = useRef<HTMLDivElement>(null);
 
   const _skip = (e: React.MouseEvent) => {
     e.preventDefault();
