@@ -48,13 +48,21 @@ export default function ({
 
   useEffect(() => {
     if (type === "input") {
-      const ele = refChildren.current?.getElementsByTagName("input")?.[0];
+      const ele = ref.current?.getElementsByTagName("input")?.[0];
       ele?.focus();
       ele?.addEventListener("blur", (e: any) => {
         if (e.target.value) {
-          setStep(stepContext + 1);
+          nextStep();
         }
       });
+
+      return () => {
+        ele?.removeEventListener("blur", (e: any) => {
+          if (e.target.value) {
+            nextStep();
+          }
+        });
+      };
     }
   });
 
@@ -68,12 +76,8 @@ export default function ({
       <div ref={ref} className="w-guide-wrap">
         {React.cloneElement(children, {
           onClick: (e: any) => {
-            if (
-              !(e.target?.offsetParent?.className.indexOf("w-guide-text") >= 0)
-            ) {
-              children.props.onClick(e);
-              nextStep();
-            }
+            children.props.onClick && children.props.onClick(e);
+            type !== "input" && nextStep();
           },
           id,
           className:
