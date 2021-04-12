@@ -1,14 +1,11 @@
 import "./style.css";
 
-import React, {
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import React, { useContext, useEffect, useMemo, useRef, useState } from "react";
 
 import GuideContext from "./../GuideContext";
+import generateId from "../generateId";
 import icon from "./../guide.svg";
+import useHandlePosition from "../useHandlePosition";
 
 interface Props {
   children: JSX.Element;
@@ -25,11 +22,18 @@ export default function ({
   text,
   type = "button",
 }: Props) {
+  const id = useMemo(() => generateId("action-driven"), []);
+  const ref = useRef<any>(null);
   const { run, step: stepContext, setStep, nextStep } = useContext(
     GuideContext
   );
   const [active, setActive] = useState(false);
-  const refChildren = useRef<HTMLDivElement>(null);
+  const refChildren = useRef<any>(null);
+
+  const { handlePosition } = useHandlePosition(refChildren, ref, {
+    position,
+    add: {},
+  });
 
   const _skip = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -53,23 +57,15 @@ export default function ({
     }
   });
 
+  useEffect(() => {
+    active && handlePosition();
+  }, [active]);
+
   return active ? (
     <div className="w-guide">
       <div className="w-guide-mark" />
-      <div ref={refChildren} className="w-guide-wrap">
+      <div ref={ref} className="w-guide-wrap">
         {React.cloneElement(children, {
-          children: (
-            <>
-              {children.props.children}
-              <div className={`w-guide-text ${position.join(" ")}`}>
-                <img src={icon} />
-                <div className="w-guide-container">
-                  <div>{text}</div>
-                  <button className="w-guide-skip" onClick={_skip}>Skip all</button>
-                </div>
-              </div>
-            </>
-          ),
           onClick: (e: any) => {
             if (
               !(e.target?.offsetParent?.className.indexOf("w-guide-text") >= 0)
@@ -78,6 +74,7 @@ export default function ({
               nextStep();
             }
           },
+          id,
           className:
             children.props.className +
             (type === "button"
@@ -86,6 +83,15 @@ export default function ({
               ? " w-guide-input"
               : " "),
         })}
+      </div>
+      <div ref={refChildren} className={`w-guide-text ${position.join(" ")}`}>
+        <img src={icon} />
+        <div className="w-guide-container">
+          <div>{text}</div>
+          <button className="w-guide-skip" onClick={_skip}>
+            Skip all
+          </button>
+        </div>
       </div>
     </div>
   ) : (

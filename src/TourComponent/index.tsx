@@ -3,6 +3,7 @@ import "./style.css";
 import React, { useContext, useEffect, useMemo, useRef, useState } from "react";
 
 import GuideContext from "./../GuideContext";
+import generateId from "../generateId";
 import useHandlePosition from "../useHandlePosition";
 
 interface Props {
@@ -20,6 +21,7 @@ export default function ({
   title,
   message,
 }: Props) {
+  const id = useMemo(() => generateId('tour-component'), []);
   const refChildren = useRef<any>(null);
   const ref = useRef<any>(null);
   const { run, step: stepContext, nextStep, total, setStep } = useContext(
@@ -58,10 +60,10 @@ export default function ({
   return active ? (
     <div className="w-guide">
       <div className="w-guide-mark" />
-      <div className="w-guide-wrap">
+      <div ref={ref} className="w-guide-wrap">
         {React.cloneElement(children, {
           onClick: () => {},
-          ref: ref,
+          id,
           className:
             children.props.className +
             ` w-guide-tour-arrow ${position.join(" ")} w-guide-relative`,

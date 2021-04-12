@@ -56,7 +56,7 @@ function useHandlePosition<T extends HTMLBaseElement>(
         transformOriginX: string = "",
         transformOriginY: string = "";
 
-      const pParent = refParent.current.getBoundingClientRect();
+      const pParent = refParent.current.firstChild.getBoundingClientRect();
       let pElement = _calPositionOfRef(translateX, translateY);
 
       /**
@@ -86,8 +86,8 @@ function useHandlePosition<T extends HTMLBaseElement>(
        */
       // Cal again position of Element
       // When it is more than height of screen
-      if (translateY > pScreen.height) {
-        translateY -= translateY - pScreen.height - pElement.height - 10;
+      if (translateY + pElement.height > pScreen.height) {
+        translateY = pScreen.height - pElement.height - 10;
       }
 
       if (translateY < 0) {
@@ -95,8 +95,8 @@ function useHandlePosition<T extends HTMLBaseElement>(
       }
 
       // When it is more than width of screen
-      if (translateX > pScreen.width) {
-        translateX -= translateX - pScreen.width - pElement.width - 10;
+      if (translateX + pElement.width > pScreen.width) {
+        translateX = pScreen.width - pElement.width - 10;
       }
 
       if (translateX < 0) {

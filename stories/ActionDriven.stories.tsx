@@ -31,7 +31,11 @@ export const ActionDriven = () => {
             Bottom right position
           </button>
         </Guide>
-        <Guide step={2} text={"Step 2"} position={["right"]}>
+        <Guide
+          step={2}
+          text={`For as long as I worked on creating this solution from multiple resources I found some had spent far longer to create this already completed solution`}
+          position={["right"]}
+        >
           <button onClick={_alert} className="step right">
             Right position
           </button>
