@@ -3,6 +3,7 @@ import "./style.css";
 import React, { useContext, useEffect, useMemo, useRef, useState } from "react";
 
 import GuideContext from "./../GuideContext";
+import ReactDOM from "react-dom";
 import generateId from "../generateId";
 import icon from "./../guide.svg";
 import useHandlePosition from "../useHandlePosition";
@@ -84,15 +85,18 @@ export default function ({
               : " "),
         })}
       </div>
-      <div ref={refChildren} className={`w-guide-text ${position.join(" ")}`}>
-        <img src={icon} />
-        <div className="w-guide-container">
-          <div>{text}</div>
-          <button className="w-guide-skip" onClick={_skip}>
-            Skip all
-          </button>
-        </div>
-      </div>
+      {ReactDOM.createPortal(
+        <div ref={refChildren} className={`w-guide-text ${position.join(" ")}`}>
+          <img src={icon} />
+          <div className="w-guide-container">
+            <div>{text}</div>
+            <button className="w-guide-skip" onClick={_skip}>
+              Skip all
+            </button>
+          </div>
+        </div>,
+        document.getElementsByTagName("body")[0]
+      )}
     </div>
   ) : (
     children

@@ -2,12 +2,13 @@
   background-color: #fff;
   border-radius: 5px;
   color: #1a1a1a;
+  height: max-content;
   max-width: 300px;
   padding: 12px 15px;
   position: fixed;
   text-align: left;
+  visibility: hidden;
   width: max-content;
-  height: max-content;
   z-index: 15;
 }
 
