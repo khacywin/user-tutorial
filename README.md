@@ -1,15 +1,15 @@
-# w-guide
+# Guide user
 
 Guide for first user
 
 ### Install
 ```
-  npm install w-guide
+  npm install guide-user
 ```
 
 ### Usage 
 ```
-  import Guide, { GuideProvider } from 'w-guide';
+  import Guide, { GuideProvider } from 'guide-user';
 
   ....
   <GuideProvider>

@@ -102,9 +102,9 @@ function GuideProvider$1(_a) {
 var css_248z$1 = "/**\r\n * CONTAINER\r\n */\r\n.w-guide-text {\r\n  color: #fff;\r\n  cursor: initial;\r\n  display: flex;\r\n  height: max-content;\r\n  max-width: 50vw;\r\n  padding: 10px;\r\n  position: fixed;\r\n  visibility: hidden;\r\n  width: max-content;\r\n  z-index: 9999;\r\n}\r\n\r\n/* Control position */\r\n/** \r\n * IMAGE\r\n */\r\n.w-guide-text img {\r\n  display: block;\r\n  width: auto;\r\n  height: 40px;\r\n  -webkit-filter: invert(100%) sepia(100%) saturate(1%) hue-rotate(194deg)\r\n    brightness(109%) contrast(101%); /* Safari 6.0 - 9.0 */\r\n  filter: invert(100%) sepia(100%) saturate(1%) hue-rotate(194deg)\r\n    brightness(109%) contrast(101%);\r\n}\r\n/* Control position of img */\r\n.w-guide-text.right{\r\n  align-items: center;\r\n}\r\n.w-guide-text.right img {\r\n  transform: scale(0.8) rotate(-33deg) translate(-13px, 3px);\r\n}\r\n\r\n.w-guide-text.left {\r\n  flex-direction: row-reverse;\r\n  align-items: center;\r\n}\r\n.w-guide-text.left img {\r\n  transform: scale(0.8) rotateX(205deg) rotateZ(342deg) translate(5px, 0);\r\n}\r\n.w-guide-text.left .w-guide-container{\r\n  text-align: right;\r\n}\r\n\r\n.w-guide-text.top {\r\n  flex-direction: column-reverse;\r\n  justify-content: center;\r\n}\r\n.w-guide-text.top img {\r\n  transform: scale(0.8) rotateX(178deg) translate(0, -7px);\r\n}\r\n.w-guide-text.top .w-guide-container{\r\n  text-align: center;\r\n}\r\n\r\n.w-guide-text.bottom {\r\n  flex-direction: column;\r\n  justify-content: center;\r\n}\r\n.w-guide-text.bottom img {\r\n  transform: rotateX(30deg) translate(0, -5px);\r\n}\r\n.w-guide-text.bottom .w-guide-container{\r\n  text-align: center;\r\n}\r\n\r\n.w-guide-text.bottom.right {\r\n  flex-direction: row;\r\n  align-items: initial;\r\n  transform: translateX(-20px);\r\n}\r\n.w-guide-text.bottom.right img {\r\n  transform: rotateX(30deg) translate(-10px, -9px);\r\n}\r\n.w-guide-text.bottom.right .w-guide-container{\r\n  text-align: left;\r\n}\r\n\r\n.w-guide-text.top.right {\r\n  flex-direction: row;\r\n  transform: translateX(-20px);\r\n}\r\n.w-guide-text.top.right img {\r\n  align-self: flex-end;\r\n  transform: rotateX(178deg) translate(-10px, -5px);\r\n}\r\n.w-guide-text.top.right .w-guide-container{\r\n  text-align: left;\r\n}\r\n\r\n.w-guide-text.top.left {\r\n  flex-direction: row-reverse;\r\n  transform: translateX(20px);\r\n  align-items: initial;\r\n}\r\n.w-guide-text.top.left img {\r\n  align-self: flex-end;\r\n  transform: rotateX(178deg) rotateY(180deg) translate(-2px, -5px);\r\n}\r\n.w-guide-text.top.left .w-guide-container{\r\n  text-align: right;\r\n}\r\n\r\n.w-guide-text.bottom.left {\r\n  flex-direction: row-reverse;\r\n  align-items: initial;\r\n  transform: translateX(20px);\r\n}\r\n.w-guide-text.bottom.left img {\r\n  transform: rotateY(180deg) translate(-10px, 0);\r\n}\r\n.w-guide-text.bottom.left .w-guide-container{\r\n  text-align: right;\r\n}\r\n\r\n/**\r\n * CONTENT\r\n */\r\n.w-guide-text .w-guide-container div {\r\n  max-width: 300px;\r\n  width: max-content;\r\n  align-self: flex-end;\r\n  pointer-events: none;\r\n  user-select: none;\r\n}\r\n.w-guide-text .w-guide-container .w-guide-skip {\r\n  background-color: transparent;\r\n  border-radius: 3px;\r\n  border: none;\r\n  color: #fff;\r\n  cursor: pointer;\r\n  font-style: italic;\r\n  margin-left: 20px;\r\n  opacity: 0.7;\r\n  outline: 0;\r\n  padding: 5px 8px;\r\n  transition: opacity 0.2s;\r\n  cursor: pointer;\r\n  border: 1px solid #fff;\r\n  margin-top: 15px;\r\n}\r\n.w-guide-text .w-guide-container .w-guide-skip:hover {\r\n  opacity: 1;\r\n}\r\n\r\n.w-guide-tap-click {\r\n  position: relative;\r\n}\r\n.w-guide-tap-click::after {\r\n  animation-delay: 0.4s;\r\n  animation: tapClick 0.8s ease-out infinite;\r\n  background-color: rgba(255, 255, 255, 0.5);\r\n  border-radius: 9999px;\r\n  content: \"\";\r\n  display: block;\r\n  height: 120%;\r\n  left: 50%;\r\n  pointer-events: none;\r\n  position: absolute;\r\n  top: 50%;\r\n  transform: translate(-50%, -50%) scale(0);\r\n  width: 120%;\r\n}\r\n\r\n.w-guide-input {\r\n  position: relative;\r\n}\r\n.w-guide-input:first-of-type {\r\n  background-color: #fff;\r\n}\r\n.w-guide-input::after {\r\n  animation-delay: 0.4s;\r\n  animation: tapClick 0.8s ease-out infinite;\r\n  background-color: rgba(255, 255, 255, 0.5);\r\n  border-radius: 9999px;\r\n  content: \"\";\r\n  display: block;\r\n  height: calc(100% + 10px);\r\n  left: 50%;\r\n  pointer-events: none;\r\n  position: absolute;\r\n  top: 50%;\r\n  transform: translate(-50%, -50%) scale(0);\r\n  width: calc(100% + 10px);\r\n}\r\n.w-guide-input .w-guide-text {\r\n  bottom: 0;\r\n  top: initial;\r\n}\r\n\r\n@keyframes tapClick {\r\n  50% {\r\n    transform: translate(-50%, -50%) scale(1.5, 1.5);\r\n    opacity: 0;\r\n  }\r\n  99% {\r\n    transform: translate(-50%, -50%) scale(0.001, 0.001);\r\n    opacity: 0;\r\n  }\r\n  100% {\r\n    transform: translate(-50%, -50%) scale(0.001, 0.001);\r\n    opacity: 1;\r\n  }\r\n}\r\n";
 styleInject(css_248z$1);
 
-var index$1 = 1;
+var index = 1;
 function generateId(name) {
-    return name + "-" + index$1++;
+    return name + "-" + index++;
 }
 
 var icon = "data:image/svg+xml,%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22utf-8%22%3F%3E%3Csvg%20version%3D%221.1%22%20id%3D%22Layer_1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20x%3D%220px%22%20y%3D%220px%22%20%20viewBox%3D%220%200%20300%20300%22%20style%3D%22enable-background%3Anew%200%200%20300%20300%3B%22%20xml%3Aspace%3D%22preserve%22%3E%3Cg%3E%20%3Cg%3E%20%20%3Cg%3E%20%20%20%3Cpath%20d%3D%22M255.6%2C254.3c-20.2-0.1-39.2-8.4-56.1-19c-17.1-10.8-30.7-25.1-41.8-42c-11.1-16.9-21.1-35-29.4-53.4%20%20%20%20c-8.4-18.7-16.1-38-22.1-57.6C99.5%2C60.4%2C93.7%2C38.2%2C84.8%2C17c-0.7-1.8-3.6-1-2.9%2C0.8c8.3%2C19.8%2C14%2C40.4%2C20.1%2C60.9%20%20%20%20c6%2C20%2C13.7%2C39.4%2C21.9%2C58.5c8.4%2C19.5%2C18.8%2C38.4%2C30.3%2C56.2c10.4%2C16.2%2C23.4%2C30.9%2C39.5%2C41.7c18.4%2C12.3%2C39.4%2C22.2%2C61.9%2C22.3%20%20%20%20C257.6%2C257.3%2C257.6%2C254.3%2C255.6%2C254.3L255.6%2C254.3z%22%2F%3E%20%20%3C%2Fg%3E%20%3C%2Fg%3E%3C%2Fg%3E%3Cg%3E%20%3Cg%3E%20%20%3Cpath%20d%3D%22M54.5%2C120.1C80.8%2C92.5%2C81%2C52.6%2C84.5%2C17c-0.6%2C0.5-1.3%2C1-1.9%2C1.4c9.4%2C4%2C18%2C9.4%2C26.7%2C14.6c9%2C5.4%2C18.3%2C10.3%2C27.7%2C15%20%20%20c17%2C8.6%2C34.4%2C15.4%2C53.2%2C18.5c1.9%2C0.3%2C2.7-2.6%2C0.8-2.9c-19.9-3.3-38.1-10.8-55.9-20c-9-4.6-18-9.5-26.6-14.7%20%20%20c-8.2-4.9-16.3-9.8-25.1-13.5c-1-0.4-1.8%2C0.6-1.9%2C1.4C78%2C51.7%2C78.1%2C91%2C52.3%2C117.9C51%2C119.3%2C53.1%2C121.5%2C54.5%2C120.1L54.5%2C120.1z%22%2F%3E%20%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E";
@@ -219,13 +219,20 @@ function ActionDrivenComponent (_a) {
     React.useEffect(function () {
         var _a, _b;
         if (type === "input") {
-            var ele = (_b = (_a = ref.current) === null || _a === void 0 ? void 0 : _a.getElementsByTagName("input")) === null || _b === void 0 ? void 0 : _b[0];
-            ele === null || ele === void 0 ? void 0 : ele.focus();
-            ele === null || ele === void 0 ? void 0 : ele.addEventListener("blur", function (e) {
+            var ele_1 = (_b = (_a = ref.current) === null || _a === void 0 ? void 0 : _a.getElementsByTagName("input")) === null || _b === void 0 ? void 0 : _b[0];
+            ele_1 === null || ele_1 === void 0 ? void 0 : ele_1.focus();
+            ele_1 === null || ele_1 === void 0 ? void 0 : ele_1.addEventListener("blur", function (e) {
                 if (e.target.value) {
                     nextStep();
                 }
             });
+            return function () {
+                ele_1 === null || ele_1 === void 0 ? void 0 : ele_1.removeEventListener("blur", function (e) {
+                    if (e.target.value) {
+                        nextStep();
+                    }
+                });
+            };
         }
     });
     React.useEffect(function () {
@@ -306,7 +313,7 @@ function TourComponent (_a) {
             React__default['default'].createElement("div", { className: "w-guide-tour-step" }, _renderStep && _renderStep.map(function (ele) { return ele; }))), document.getElementsByTagName("body")[0]))) : (children);
 }
 
-function index (props) {
+function Guide(props) {
     var mode = React.useContext(GuideContext$1).mode;
     return mode === "action-driven" ? (React__default['default'].createElement(ActionDrivenComponent, __assign({}, props))) : (React__default['default'].createElement(TourComponent, __assign({}, props)));
 }
@@ -315,5 +322,5 @@ var GuideProvider = GuideProvider$1;
 
 exports.GuideContext = GuideContext;
 exports.GuideProvider = GuideProvider;
-exports.default = index;
+exports.default = Guide;
 //# sourceMappingURL=index.cjs.js.map

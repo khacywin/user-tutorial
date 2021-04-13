@@ -16,7 +16,7 @@ interface Props {
   type?: "button" | "input";
 }
 
-export default function(props: Props) {
+export default function Guide(props: Props) {
   const { mode } = useContext(Context);
 
   return mode === "action-driven" ? (

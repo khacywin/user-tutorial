@@ -10,7 +10,7 @@ interface Props {
     title?: string;
     type?: "button" | "input";
 }
-export default function (props: Props): JSX.Element;
+export default function Guide(props: Props): JSX.Element;
 export declare const GuideContext: React.Context<import("./GuideContext").IGuide>;
 export declare const GuideProvider: typeof Provider;
 export interface IGuide {
