@@ -54,7 +54,7 @@ function styleInject(css, ref) {
   }
 }
 
-var css_248z$2 = ".w-guide {\r\n  display: contents;\r\n  position: relative;\r\n}\r\n\r\n.w-guide-mark {\r\n  background-color: rgba(0, 0, 0, 0.5);\r\n  display: initial;\r\n  height: 100vh;\r\n  left: 0;\r\n  position: fixed;\r\n  top: 0;\r\n  z-index: 10;\r\n  width: 100vw;\r\n}\r\n\r\n.w-guide-wrap {\r\n  display: contents;\r\n}\r\n.w-guide-wrap > * {\r\n  z-index: 11;\r\n}\r\n\r\n.w-guide-relative {\r\n  position: relative;\r\n}\r\n";
+var css_248z$2 = ".w-guide {\r\n  display: contents;\r\n  position: relative;\r\n}\r\n\r\n.w-guide-mark {\r\n  background-color: rgba(0, 0, 0, 0.5);\r\n  position: fixed;\r\n  display: block;\r\n  height: 100vh;\r\n  left: 0;\r\n  top: 0;\r\n  z-index: 10;\r\n  width: 100vw;\r\n}\r\n\r\n.w-guide-wrap {\r\n  display: contents;\r\n}\r\n.w-guide-wrap > * {\r\n  z-index: 11;\r\n}\r\n\r\n.w-guide-relative {\r\n  position: relative;\r\n}\r\n";
 styleInject(css_248z$2);
 
 var GuideContext$1 = createContext({
@@ -192,6 +192,7 @@ function ActionDrivenComponent (_a) {
     var children = _a.children, _b = _a.position, position = _b === void 0 ? ["bottom", "left"] : _b, step = _a.step, text = _a.text, _c = _a.type, type = _c === void 0 ? "button" : _c;
     var id = useMemo(function () { return generateId("action-driven"); }, []);
     var ref = useRef(null);
+    var refMark = useRef(null);
     var _d = useContext(GuideContext$1), run = _d.run, stepContext = _d.step, setStep = _d.setStep, nextStep = _d.nextStep;
     var _e = useState(false), active = _e[0], setActive = _e[1];
     var refChildren = useRef(null);
@@ -209,28 +210,38 @@ function ActionDrivenComponent (_a) {
     }, [stepContext, run, step]);
     useEffect(function () {
         var _a, _b;
-        if (type === "input") {
-            var ele_1 = (_b = (_a = ref.current) === null || _a === void 0 ? void 0 : _a.getElementsByTagName("input")) === null || _b === void 0 ? void 0 : _b[0];
-            ele_1 === null || ele_1 === void 0 ? void 0 : ele_1.focus();
-            ele_1 === null || ele_1 === void 0 ? void 0 : ele_1.addEventListener("blur", function (e) {
+        if (!active || type !== "input")
+            return;
+        var ele = (_b = (_a = ref.current) === null || _a === void 0 ? void 0 : _a.getElementsByTagName("input")) === null || _b === void 0 ? void 0 : _b[0];
+        ele === null || ele === void 0 ? void 0 : ele.focus();
+        ele === null || ele === void 0 ? void 0 : ele.addEventListener("blur", function (e) {
+            if (e.target.value) {
+                nextStep();
+            }
+        });
+        return function () {
+            ele === null || ele === void 0 ? void 0 : ele.removeEventListener("blur", function (e) {
                 if (e.target.value) {
                     nextStep();
                 }
             });
-            return function () {
-                ele_1 === null || ele_1 === void 0 ? void 0 : ele_1.removeEventListener("blur", function (e) {
-                    if (e.target.value) {
-                        nextStep();
-                    }
-                });
-            };
-        }
-    });
+        };
+    }, [type, active]);
     useEffect(function () {
         active && handlePosition();
     }, [active]);
+    useEffect(function () {
+        var _a;
+        if (!((_a = refMark.current) === null || _a === void 0 ? void 0 : _a.getBoundingClientRect()))
+            return;
+        var position = refMark.current.getBoundingClientRect();
+        if (position.x > 0)
+            refMark.current.style.left = -position.x + "px";
+        if (position.y > 0)
+            refMark.current.style.top = -position.y + "px";
+    });
     return active ? (React.createElement("div", { className: "w-guide" },
-        React.createElement("div", { className: "w-guide-mark" }),
+        React.createElement("div", { className: "w-guide-mark", ref: refMark }),
         React.createElement("div", { ref: ref, className: "w-guide-wrap" }, React.cloneElement(children, {
             onClick: function (e) {
                 children.props.onClick && children.props.onClick(e);
@@ -311,6 +322,5 @@ function Guide(props) {
 var GuideContext = GuideContext$1;
 var GuideProvider = GuideProvider$1;
 
-export default Guide;
-export { GuideContext, GuideProvider };
+export { GuideContext, GuideProvider, Guide as default };
 //# sourceMappingURL=index.esm.js.map

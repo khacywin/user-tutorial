@@ -1,6 +1,6 @@
 {
-  "name": "guide-user",
-  "version": "1.0.1",
+  "name": "user-tutorial",
+  "version": "1.0.0",
   "description": "React package about user dashboard",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
@@ -15,10 +15,10 @@
     "url": "git+https://github.com/khacywin/w-guide.git"
   },
   "keywords": [
-    "guide",
     "first time",
     "react",
-    "user dashboard"
+    "user dashboard",
+    "tutorial user"
   ],
   "author": "khacywin",
   "license": "ISC",
@@ -52,5 +52,8 @@
   "peerDependencies": {
     "react": ">=16.8.0",
     "react-dom": ">=16.8.0"
+  },
+  "dependencies": {
+    "postcss": "^8.3.6"
   }
 }

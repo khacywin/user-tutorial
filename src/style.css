@@ -5,10 +5,10 @@
 
 .w-guide-mark {
   background-color: rgba(0, 0, 0, 0.5);
-  display: initial;
+  position: fixed;
+  display: block;
   height: 100vh;
   left: 0;
-  position: fixed;
   top: 0;
   z-index: 10;
   width: 100vw;

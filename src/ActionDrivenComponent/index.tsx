@@ -24,7 +24,10 @@ export default function ({
   type = "button",
 }: Props) {
   const id = useMemo(() => generateId("action-driven"), []);
+
   const ref = useRef<any>(null);
+  const refMark = useRef<HTMLDivElement>(null);
+
   const { run, step: stepContext, setStep, nextStep } = useContext(
     GuideContext
   );
@@ -47,32 +50,41 @@ export default function ({
   }, [stepContext, run, step]);
 
   useEffect(() => {
-    if (type === "input") {
-      const ele = ref.current?.getElementsByTagName("input")?.[0];
-      ele?.focus();
-      ele?.addEventListener("blur", (e: any) => {
+    if (!active || type !== "input") return;
+
+    const ele = ref.current?.getElementsByTagName("input")?.[0];
+    ele?.focus();
+    ele?.addEventListener("blur", (e: any) => {
+      if (e.target.value) {
+        nextStep();
+      }
+    });
+
+    return () => {
+      ele?.removeEventListener("blur", (e: any) => {
         if (e.target.value) {
           nextStep();
         }
       });
-
-      return () => {
-        ele?.removeEventListener("blur", (e: any) => {
-          if (e.target.value) {
-            nextStep();
-          }
-        });
-      };
-    }
-  });
+    };
+  }, [type, active]);
 
   useEffect(() => {
     active && handlePosition();
   }, [active]);
 
+  useEffect(() => {
+    if (!refMark.current?.getBoundingClientRect()) return;
+
+    const position = refMark.current.getBoundingClientRect();
+
+    if (position.x > 0) refMark.current.style.left = `${-position.x}px`;
+    if (position.y > 0) refMark.current.style.top = `${-position.y}px`;
+  });
+
   return active ? (
     <div className="w-guide">
-      <div className="w-guide-mark" />
+      <div className="w-guide-mark" ref={refMark} />
       <div ref={ref} className="w-guide-wrap">
         {React.cloneElement(children, {
           onClick: (e: any) => {
@@ -85,8 +97,8 @@ export default function ({
             (type === "button"
               ? " w-guide-tap-click"
               : type === "input"
-              ? " w-guide-input"
-              : " "),
+                ? " w-guide-input"
+                : " "),
         })}
       </div>
       {ReactDOM.createPortal(
