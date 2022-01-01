@@ -9,16 +9,25 @@ export default {
 
 export const ActionDriven = () => {
   const [step, setStep] = useState(1);
-
+  const [run, setRun] = useState(false);
+  
   function _alert() {
     alert("Hello");
   }
 
+  const start = () => {
+    setRun(true);
+  }
+  
   return (
+    <div>
+      <button onClick={start}> Start </button>
     <GuideProvider
       value={{
         step,
         setStep,
+        run,
+        setRun
       }}
     >
       <div className="column action-driven">
@@ -106,5 +115,6 @@ export const ActionDriven = () => {
         <button onClick={() => setStep(8)}>Bottom</button>
       </div>
     </GuideProvider>
+    </div>
   );
 };

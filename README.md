@@ -31,7 +31,8 @@ Properties of it
   mode?: "tour" | "action-driven";
   nextStep?: function;
   previousStep?: function;
-  run: boolean;
+  run?: boolean;
+  setRun?: boolean;
   setStep?: function;
   setTotal?: function;
   step: number;
@@ -69,6 +70,7 @@ Use with <b>useConext</b> hook
     nextStep,
     previousStep,
     run, 
+    setRun,
     setStep, 
     setTotal
     step, 

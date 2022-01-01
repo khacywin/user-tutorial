@@ -1,4 +1,4 @@
-import React, { createContext, useMemo, useState } from "react";
+import React, { createContext, useEffect, useMemo, useState } from "react";
 
 export interface IGuide {
   mode?: "tour" | "action-driven";
@@ -6,6 +6,7 @@ export interface IGuide {
   previousStep?: any;
   run: boolean;
   setStep: any;
+  setRun: any;
   setTotal?: any;
   step: number;
   total?: number;
@@ -16,6 +17,7 @@ const GuideContext = createContext<IGuide>({
   nextStep: () => {},
   previousStep: () => {},
   run: true,
+  setRun: () => {},
   setStep: () => {},
   setTotal: () => {},
   step: 1,
@@ -32,18 +34,31 @@ interface IGuideProvider {
 export function GuideProvider({ value = {}, children }: IGuideProvider) {
   const [step, setStep] = useState(1);
   const [total, setTotal] = useState(1);
+  const [isRun, setIsRun] = useState(true);
 
-  const nextStep = () =>
-    value.setStep && value.step ? value.setStep(value.step + 1) : setStep(step + 1);
-  const previousStep = () =>
-    value.setStep && value.step ? value.setStep(value.step - 1) : setStep(step - 1);
+  const nextStep = () => {
+    if (value.setStep && value.step) {
+      value.setStep(value.step + 1);
+    } else {
+      setStep(step + 1);
+    }
+  };
+
+  const previousStep = () => {
+    if (value.setStep && value.step) {
+      value.setStep(value.step - 1);
+    } else {
+      setStep(step - 1);
+    }
+  };
 
   const defaultValue: IGuide = useMemo(
     () => ({
       mode: "action-driven",
       nextStep,
       previousStep,
-      run: true,
+      run: isRun,
+      setRun: setIsRun,
       setStep,
       setTotal,
       step,

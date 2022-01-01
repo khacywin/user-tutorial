@@ -28,7 +28,7 @@ export default function ({
   const ref = useRef<any>(null);
   const refMark = useRef<HTMLDivElement>(null);
 
-  const { run, step: stepContext, setStep, nextStep } = useContext(
+  const { run,setRun, step: stepContext, setStep, nextStep } = useContext(
     GuideContext
   );
   const [active, setActive] = useState(false);
@@ -42,7 +42,9 @@ export default function ({
   const _skip = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    setStep(0);
+
+    setRun(false);
+    setStep(1);
   };
 
   useEffect(() => {
