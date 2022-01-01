@@ -13,14 +13,4 @@ interface Props {
 export default function Guide(props: Props): JSX.Element;
 export declare const GuideContext: React.Context<import("./GuideContext").IGuide>;
 export declare const GuideProvider: typeof Provider;
-export interface IGuide {
-    mode?: "tour" | "action-driven";
-    nextStep?: any;
-    previousStep?: any;
-    run: boolean;
-    setStep: any;
-    setTotal?: any;
-    step: number;
-    total?: number;
-}
 export {};

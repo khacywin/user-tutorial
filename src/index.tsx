@@ -28,13 +28,3 @@ export default function Guide(props: Props) {
 
 export const GuideContext = Context;
 export const GuideProvider = Provider;
-export interface IGuide {
-  mode?: "tour" | "action-driven";
-  nextStep?: any;
-  previousStep?: any;
-  run: boolean;
-  setStep: any;
-  setTotal?: any;
-  step: number;
-  total?: number;
-};
