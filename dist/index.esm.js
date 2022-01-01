@@ -62,6 +62,7 @@ var GuideContext$1 = createContext({
     nextStep: function () { },
     previousStep: function () { },
     run: true,
+    setRun: function () { },
     setStep: function () { },
     setTotal: function () { },
     step: 1,
@@ -71,17 +72,29 @@ function GuideProvider$1(_a) {
     var _b = _a.value, value = _b === void 0 ? {} : _b, children = _a.children;
     var _c = useState(1), step = _c[0], setStep = _c[1];
     var _d = useState(1), total = _d[0], setTotal = _d[1];
+    var _e = useState(true), isRun = _e[0], setIsRun = _e[1];
     var nextStep = function () {
-        return value.setStep && value.step ? value.setStep(value.step + 1) : setStep(step + 1);
+        if (value.setStep && value.step) {
+            value.setStep(value.step + 1);
+        }
+        else {
+            setStep(step + 1);
+        }
     };
     var previousStep = function () {
-        return value.setStep && value.step ? value.setStep(value.step - 1) : setStep(step - 1);
+        if (value.setStep && value.step) {
+            value.setStep(value.step - 1);
+        }
+        else {
+            setStep(step - 1);
+        }
     };
     var defaultValue = useMemo(function () { return ({
         mode: "action-driven",
         nextStep: nextStep,
         previousStep: previousStep,
-        run: true,
+        run: isRun,
+        setRun: setIsRun,
         setStep: setStep,
         setTotal: setTotal,
         step: step,
@@ -179,7 +192,7 @@ function useHandlePosition(ref, refParent, options) {
             }
             ref.current.style.top = translateY + "px";
             ref.current.style.left = translateX + "px";
-            ref.current.style.transformOrigin = transformOriginX + " " + transformOriginY;
+            ref.current.style.transformOrigin = "".concat(transformOriginX, " ").concat(transformOriginY);
             ref.current.style.visibility = "visible";
         }
     }, [ref.current, refParent.current]);
@@ -193,7 +206,7 @@ function ActionDrivenComponent (_a) {
     var id = useMemo(function () { return generateId("action-driven"); }, []);
     var ref = useRef(null);
     var refMark = useRef(null);
-    var _d = useContext(GuideContext$1), run = _d.run, stepContext = _d.step, setStep = _d.setStep, nextStep = _d.nextStep;
+    var _d = useContext(GuideContext$1), run = _d.run, setRun = _d.setRun, stepContext = _d.step, setStep = _d.setStep, nextStep = _d.nextStep;
     var _e = useState(false), active = _e[0], setActive = _e[1];
     var refChildren = useRef(null);
     var handlePosition = useHandlePosition(refChildren, ref, {
@@ -203,7 +216,8 @@ function ActionDrivenComponent (_a) {
     var _skip = function (e) {
         e.preventDefault();
         e.stopPropagation();
-        setStep(0);
+        setRun(false);
+        setStep(1);
     };
     useEffect(function () {
         setActive(run && step === stepContext);
@@ -236,9 +250,9 @@ function ActionDrivenComponent (_a) {
             return;
         var position = refMark.current.getBoundingClientRect();
         if (position.x > 0)
-            refMark.current.style.left = -position.x + "px";
+            refMark.current.style.left = "".concat(-position.x, "px");
         if (position.y > 0)
-            refMark.current.style.top = -position.y + "px";
+            refMark.current.style.top = "".concat(-position.y, "px");
     });
     return active ? (React.createElement("div", { className: "w-guide" },
         React.createElement("div", { className: "w-guide-mark", ref: refMark }),
@@ -255,7 +269,7 @@ function ActionDrivenComponent (_a) {
                         ? " w-guide-input"
                         : " "),
         })),
-        ReactDOM.createPortal(React.createElement("div", { ref: refChildren, className: "w-guide-text " + position.join(" ") },
+        ReactDOM.createPortal(React.createElement("div", { ref: refChildren, className: "w-guide-text ".concat(position.join(" ")) },
             React.createElement("img", { src: icon }),
             React.createElement("div", { className: "w-guide-container" },
                 React.createElement("div", null, text),
@@ -304,9 +318,9 @@ function TourComponent (_a) {
             onClick: function () { },
             id: id,
             className: (children.props.className || "") +
-                (" w-guide-tour-arrow " + position.join(" ") + " w-guide-relative"),
+                " w-guide-tour-arrow ".concat(position.join(" "), " w-guide-relative"),
         })),
-        ReactDOM.createPortal(React.createElement("div", { ref: refChildren, className: "w-guide-tour-cp " + position.join(" ") },
+        ReactDOM.createPortal(React.createElement("div", { ref: refChildren, className: "w-guide-tour-cp ".concat(position.join(" ")) },
             title && React.createElement("div", { className: "w-guide-tour-title" }, title),
             message && React.createElement("div", { className: "w-guide-tour-message" }, message),
             React.createElement("div", { className: "w-guide-tour-footer" },

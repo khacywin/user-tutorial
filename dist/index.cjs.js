@@ -71,6 +71,7 @@ var GuideContext$1 = React.createContext({
     nextStep: function () { },
     previousStep: function () { },
     run: true,
+    setRun: function () { },
     setStep: function () { },
     setTotal: function () { },
     step: 1,
@@ -80,23 +81,35 @@ function GuideProvider$1(_a) {
     var _b = _a.value, value = _b === void 0 ? {} : _b, children = _a.children;
     var _c = React.useState(1), step = _c[0], setStep = _c[1];
     var _d = React.useState(1), total = _d[0], setTotal = _d[1];
+    var _e = React.useState(true), isRun = _e[0], setIsRun = _e[1];
     var nextStep = function () {
-        return value.setStep && value.step ? value.setStep(value.step + 1) : setStep(step + 1);
+        if (value.setStep && value.step) {
+            value.setStep(value.step + 1);
+        }
+        else {
+            setStep(step + 1);
+        }
     };
     var previousStep = function () {
-        return value.setStep && value.step ? value.setStep(value.step - 1) : setStep(step - 1);
+        if (value.setStep && value.step) {
+            value.setStep(value.step - 1);
+        }
+        else {
+            setStep(step - 1);
+        }
     };
     var defaultValue = React.useMemo(function () { return ({
         mode: "action-driven",
         nextStep: nextStep,
         previousStep: previousStep,
-        run: true,
+        run: isRun,
+        setRun: setIsRun,
         setStep: setStep,
         setTotal: setTotal,
         step: step,
         total: total,
     }); }, [nextStep, previousStep]);
-    return (React__default['default'].createElement(GuideContext$1.Provider, { value: __assign(__assign({}, defaultValue), value) }, children));
+    return (React__default["default"].createElement(GuideContext$1.Provider, { value: __assign(__assign({}, defaultValue), value) }, children));
 }
 
 var css_248z$1 = "/**\r\n * CONTAINER\r\n */\r\n.w-guide-text {\r\n  color: #fff;\r\n  cursor: initial;\r\n  display: flex;\r\n  height: max-content;\r\n  max-width: 50vw;\r\n  padding: 10px;\r\n  position: fixed;\r\n  visibility: hidden;\r\n  width: max-content;\r\n  z-index: 9999;\r\n}\r\n\r\n/* Control position */\r\n/** \r\n * IMAGE\r\n */\r\n.w-guide-text img {\r\n  display: block;\r\n  width: auto;\r\n  height: 40px;\r\n  -webkit-filter: invert(100%) sepia(100%) saturate(1%) hue-rotate(194deg)\r\n    brightness(109%) contrast(101%); /* Safari 6.0 - 9.0 */\r\n  filter: invert(100%) sepia(100%) saturate(1%) hue-rotate(194deg)\r\n    brightness(109%) contrast(101%);\r\n}\r\n/* Control position of img */\r\n.w-guide-text.right{\r\n  align-items: center;\r\n}\r\n.w-guide-text.right img {\r\n  transform: scale(0.8) rotate(-33deg) translate(-13px, 3px);\r\n}\r\n\r\n.w-guide-text.left {\r\n  flex-direction: row-reverse;\r\n  align-items: center;\r\n}\r\n.w-guide-text.left img {\r\n  transform: scale(0.8) rotateX(205deg) rotateZ(342deg) translate(5px, 0);\r\n}\r\n.w-guide-text.left .w-guide-container{\r\n  text-align: right;\r\n}\r\n\r\n.w-guide-text.top {\r\n  flex-direction: column-reverse;\r\n  justify-content: center;\r\n}\r\n.w-guide-text.top img {\r\n  transform: scale(0.8) rotateX(178deg) translate(0, -7px);\r\n}\r\n.w-guide-text.top .w-guide-container{\r\n  text-align: center;\r\n}\r\n\r\n.w-guide-text.bottom {\r\n  flex-direction: column;\r\n  justify-content: center;\r\n}\r\n.w-guide-text.bottom img {\r\n  transform: rotateX(30deg) translate(0, -5px);\r\n}\r\n.w-guide-text.bottom .w-guide-container{\r\n  text-align: center;\r\n}\r\n\r\n.w-guide-text.bottom.right {\r\n  flex-direction: row;\r\n  align-items: initial;\r\n  transform: translateX(-20px);\r\n}\r\n.w-guide-text.bottom.right img {\r\n  transform: rotateX(30deg) translate(-10px, -9px);\r\n}\r\n.w-guide-text.bottom.right .w-guide-container{\r\n  text-align: left;\r\n}\r\n\r\n.w-guide-text.top.right {\r\n  flex-direction: row;\r\n  transform: translateX(-20px);\r\n}\r\n.w-guide-text.top.right img {\r\n  align-self: flex-end;\r\n  transform: rotateX(178deg) translate(-10px, -5px);\r\n}\r\n.w-guide-text.top.right .w-guide-container{\r\n  text-align: left;\r\n}\r\n\r\n.w-guide-text.top.left {\r\n  flex-direction: row-reverse;\r\n  transform: translateX(20px);\r\n  align-items: initial;\r\n}\r\n.w-guide-text.top.left img {\r\n  align-self: flex-end;\r\n  transform: rotateX(178deg) rotateY(180deg) translate(-2px, -5px);\r\n}\r\n.w-guide-text.top.left .w-guide-container{\r\n  text-align: right;\r\n}\r\n\r\n.w-guide-text.bottom.left {\r\n  flex-direction: row-reverse;\r\n  align-items: initial;\r\n  transform: translateX(20px);\r\n}\r\n.w-guide-text.bottom.left img {\r\n  transform: rotateY(180deg) translate(-10px, 0);\r\n}\r\n.w-guide-text.bottom.left .w-guide-container{\r\n  text-align: right;\r\n}\r\n\r\n/**\r\n * CONTENT\r\n */\r\n.w-guide-text .w-guide-container div {\r\n  max-width: 300px;\r\n  width: max-content;\r\n  align-self: flex-end;\r\n  pointer-events: none;\r\n  user-select: none;\r\n}\r\n.w-guide-text .w-guide-container .w-guide-skip {\r\n  background-color: transparent;\r\n  border-radius: 3px;\r\n  border: none;\r\n  color: #fff;\r\n  cursor: pointer;\r\n  font-style: italic;\r\n  margin-left: 20px;\r\n  opacity: 0.7;\r\n  outline: 0;\r\n  padding: 5px 8px;\r\n  transition: opacity 0.2s;\r\n  cursor: pointer;\r\n  border: 1px solid #fff;\r\n  margin-top: 15px;\r\n}\r\n.w-guide-text .w-guide-container .w-guide-skip:hover {\r\n  opacity: 1;\r\n}\r\n\r\n.w-guide-tap-click {\r\n  position: relative;\r\n}\r\n.w-guide-tap-click::after {\r\n  animation-delay: 0.4s;\r\n  animation: tapClick 0.8s ease-out infinite;\r\n  background-color: rgba(255, 255, 255, 0.5);\r\n  border-radius: 9999px;\r\n  content: \"\";\r\n  display: block;\r\n  height: 120%;\r\n  left: 50%;\r\n  pointer-events: none;\r\n  position: absolute;\r\n  top: 50%;\r\n  transform: translate(-50%, -50%) scale(0);\r\n  width: 120%;\r\n}\r\n\r\n.w-guide-input {\r\n  position: relative;\r\n}\r\n.w-guide-input:first-of-type {\r\n  background-color: #fff;\r\n}\r\n.w-guide-input::after {\r\n  animation-delay: 0.4s;\r\n  animation: tapClick 0.8s ease-out infinite;\r\n  background-color: rgba(255, 255, 255, 0.5);\r\n  border-radius: 9999px;\r\n  content: \"\";\r\n  display: block;\r\n  height: calc(100% + 10px);\r\n  left: 50%;\r\n  pointer-events: none;\r\n  position: absolute;\r\n  top: 50%;\r\n  transform: translate(-50%, -50%) scale(0);\r\n  width: calc(100% + 10px);\r\n}\r\n.w-guide-input .w-guide-text {\r\n  bottom: 0;\r\n  top: initial;\r\n}\r\n\r\n@keyframes tapClick {\r\n  50% {\r\n    transform: translate(-50%, -50%) scale(1.5, 1.5);\r\n    opacity: 0;\r\n  }\r\n  99% {\r\n    transform: translate(-50%, -50%) scale(0.001, 0.001);\r\n    opacity: 0;\r\n  }\r\n  100% {\r\n    transform: translate(-50%, -50%) scale(0.001, 0.001);\r\n    opacity: 1;\r\n  }\r\n}\r\n";
@@ -188,7 +201,7 @@ function useHandlePosition(ref, refParent, options) {
             }
             ref.current.style.top = translateY + "px";
             ref.current.style.left = translateX + "px";
-            ref.current.style.transformOrigin = transformOriginX + " " + transformOriginY;
+            ref.current.style.transformOrigin = "".concat(transformOriginX, " ").concat(transformOriginY);
             ref.current.style.visibility = "visible";
         }
     }, [ref.current, refParent.current]);
@@ -202,7 +215,7 @@ function ActionDrivenComponent (_a) {
     var id = React.useMemo(function () { return generateId("action-driven"); }, []);
     var ref = React.useRef(null);
     var refMark = React.useRef(null);
-    var _d = React.useContext(GuideContext$1), run = _d.run, stepContext = _d.step, setStep = _d.setStep, nextStep = _d.nextStep;
+    var _d = React.useContext(GuideContext$1), run = _d.run, setRun = _d.setRun, stepContext = _d.step, setStep = _d.setStep, nextStep = _d.nextStep;
     var _e = React.useState(false), active = _e[0], setActive = _e[1];
     var refChildren = React.useRef(null);
     var handlePosition = useHandlePosition(refChildren, ref, {
@@ -212,7 +225,8 @@ function ActionDrivenComponent (_a) {
     var _skip = function (e) {
         e.preventDefault();
         e.stopPropagation();
-        setStep(0);
+        setRun(false);
+        setStep(1);
     };
     React.useEffect(function () {
         setActive(run && step === stepContext);
@@ -245,13 +259,13 @@ function ActionDrivenComponent (_a) {
             return;
         var position = refMark.current.getBoundingClientRect();
         if (position.x > 0)
-            refMark.current.style.left = -position.x + "px";
+            refMark.current.style.left = "".concat(-position.x, "px");
         if (position.y > 0)
-            refMark.current.style.top = -position.y + "px";
+            refMark.current.style.top = "".concat(-position.y, "px");
     });
-    return active ? (React__default['default'].createElement("div", { className: "w-guide" },
-        React__default['default'].createElement("div", { className: "w-guide-mark", ref: refMark }),
-        React__default['default'].createElement("div", { ref: ref, className: "w-guide-wrap" }, React__default['default'].cloneElement(children, {
+    return active ? (React__default["default"].createElement("div", { className: "w-guide" },
+        React__default["default"].createElement("div", { className: "w-guide-mark", ref: refMark }),
+        React__default["default"].createElement("div", { ref: ref, className: "w-guide-wrap" }, React__default["default"].cloneElement(children, {
             onClick: function (e) {
                 children.props.onClick && children.props.onClick(e);
                 type !== "input" && nextStep();
@@ -264,11 +278,11 @@ function ActionDrivenComponent (_a) {
                         ? " w-guide-input"
                         : " "),
         })),
-        ReactDOM__default['default'].createPortal(React__default['default'].createElement("div", { ref: refChildren, className: "w-guide-text " + position.join(" ") },
-            React__default['default'].createElement("img", { src: icon }),
-            React__default['default'].createElement("div", { className: "w-guide-container" },
-                React__default['default'].createElement("div", null, text),
-                React__default['default'].createElement("button", { className: "w-guide-skip", onClick: _skip }, "Skip all"))), document.getElementsByTagName("body")[0]))) : (children);
+        ReactDOM__default["default"].createPortal(React__default["default"].createElement("div", { ref: refChildren, className: "w-guide-text ".concat(position.join(" ")) },
+            React__default["default"].createElement("img", { src: icon }),
+            React__default["default"].createElement("div", { className: "w-guide-container" },
+                React__default["default"].createElement("div", null, text),
+                React__default["default"].createElement("button", { className: "w-guide-skip", onClick: _skip }, "Skip all"))), document.getElementsByTagName("body")[0]))) : (children);
 }
 
 var css_248z = ".w-guide-tour-cp{\r\n  background-color: #fff;\r\n  border-radius: 5px;\r\n  color: #1a1a1a;\r\n  height: max-content;\r\n  max-width: 300px;\r\n  padding: 12px 15px;\r\n  position: fixed;\r\n  text-align: left;\r\n  visibility: hidden;\r\n  width: max-content;\r\n  z-index: 9999;\r\n}\r\n\r\n/* .w-guide-tour-cp.left{\r\n  top: 0;\r\n  right: calc(100% + 10px);\r\n}\r\n\r\n.w-guide-tour-cp.right{\r\n  top: 0;\r\n  left: calc(100% + 10px);\r\n}\r\n\r\n.w-guide-tour-cp.bottom{\r\n  top: calc(100% + 10px);\r\n  left: 0;\r\n}\r\n\r\n.w-guide-tour-cp.top{\r\n  bottom: calc(100% + 10px);\r\n  left: 0;\r\n} */\r\n\r\n.w-guide-tour-title {\r\n  font-weight: 600;\r\n}\r\n\r\n.w-guide-tour-message {\r\n  margin-top: 10px;\r\n  opacity: 0.8;\r\n}\r\n\r\n.w-guide-tour-footer {\r\n  align-items: center;\r\n  display: flex;\r\n  justify-content: space-between;\r\n  flex-wrap: wrap;\r\n  margin-top: 12px;\r\n}\r\n\r\n.w-guide-tour-step {\r\n  width: 100%;\r\n  min-width: 200px;\r\n  max-width: 300px;\r\n  margin-top: 14px;\r\n  display: flex;\r\n}\r\n\r\n.w-guide-tour-step div{\r\n  border-radius: 50%;\r\n  height: 6px;\r\n  width: 6px;\r\n  border: 1px solid #d3d3d3;\r\n  margin-right: 10px;\r\n}\r\n\r\n.w-guide-tour-step .active{\r\n  border-color: transparent;\r\n  background-color: #22402F;\r\n  transform: translateX(0) scale(1.5);\r\n  animation: stepAni 0.4s linear;\r\n  animation-delay: 0.2s;\r\n}\r\n\r\n@keyframes stepAni {\r\n  0%{\r\n    transform: scale(1) translateX(-16px);\r\n  }\r\n  100%{\r\n    transform: scale(1.5) translateX(0);\r\n  }\r\n}\r\n\r\n.w-guide-tour-next {\r\n  background-color: #22402F;\r\n  border-radius: 3px;\r\n  border: none;\r\n  color: #fff;\r\n  cursor: pointer;\r\n  opacity: 0.7;\r\n  outline: 0;\r\n  padding: 5px 8px;\r\n  transition: opacity 0.2s;\r\n}\r\n.w-guide-tour-next:hover{\r\n  opacity: 1;\r\n}\r\n\r\n.w-guide-tour-skip{\r\n  background-color: transparent;\r\n  border-radius: 3px;\r\n  border: none;\r\n  color: #1a1a1a;\r\n  cursor: pointer;\r\n  font-style: italic;\r\n  opacity: 0.7;\r\n  outline: 0;\r\n  padding: 5px 8px;\r\n  transition: opacity 0.2s;\r\n}\r\n.w-guide-tour-skip:hover{\r\n  opacity: 1;\r\n}\r\n\r\n.w-guide-tour-arrow{\r\n  position: relative;\r\n}\r\n.w-guide-tour-arrow:after{\r\n  content: '';\r\n  height: 0;\r\n  position: absolute;\r\n  width: 0;\r\n}\r\n\r\n.w-guide-tour-arrow.left:after{\r\n  border-bottom: 6px solid transparent;  \r\n  border-left: 8px solid #fff;\r\n  border-top: 6px solid transparent;\r\n  left: -10px;\r\n  top: 50%;\r\n  transform: translate(0, -50%);\r\n}\r\n\r\n.w-guide-tour-arrow.right:after{\r\n  border-bottom: 6px solid transparent; \r\n  border-right: 8px solid #fff;\r\n  border-top: 6px solid transparent;\r\n  right: -10px;\r\n  top: 50%;\r\n  transform: translate(0, -50%);\r\n}\r\n\r\n.w-guide-tour-arrow.bottom:after{\r\n  border-bottom: 8px solid #fff;\r\n  border-left: 6px solid transparent;\r\n  border-right: 6px solid transparent;\r\n  left: 50%;\r\n  bottom: -10px;\r\n  transform: translate(-50%, 0);\r\n}\r\n\r\n.w-guide-tour-arrow.top:after{\r\n  border-left: 6px solid transparent;\r\n  border-right: 6px solid transparent;\r\n  border-top: 8px solid #fff;\r\n  left: 50%;\r\n  top: -10px;\r\n  transform: translate(-50%, 0);\r\n}\r\n";
@@ -297,7 +311,7 @@ function TourComponent (_a) {
         var _total = total || 0;
         var html = [];
         for (var i = 1; i <= _total; i++) {
-            html.push(React__default['default'].createElement("div", { key: i, className: stepContext === i ? "active" : "" }));
+            html.push(React__default["default"].createElement("div", { key: i, className: stepContext === i ? "active" : "" }));
         }
         return html;
     }, [total, stepContext]);
@@ -307,31 +321,31 @@ function TourComponent (_a) {
     React.useEffect(function () {
         active && handlePosition();
     }, [active]);
-    return active ? (React__default['default'].createElement("div", { className: "w-guide" },
-        React__default['default'].createElement("div", { className: "w-guide-mark" }),
-        React__default['default'].createElement("div", { ref: ref, className: "w-guide-wrap" }, React__default['default'].cloneElement(children, {
+    return active ? (React__default["default"].createElement("div", { className: "w-guide" },
+        React__default["default"].createElement("div", { className: "w-guide-mark" }),
+        React__default["default"].createElement("div", { ref: ref, className: "w-guide-wrap" }, React__default["default"].cloneElement(children, {
             onClick: function () { },
             id: id,
             className: (children.props.className || "") +
-                (" w-guide-tour-arrow " + position.join(" ") + " w-guide-relative"),
+                " w-guide-tour-arrow ".concat(position.join(" "), " w-guide-relative"),
         })),
-        ReactDOM__default['default'].createPortal(React__default['default'].createElement("div", { ref: refChildren, className: "w-guide-tour-cp " + position.join(" ") },
-            title && React__default['default'].createElement("div", { className: "w-guide-tour-title" }, title),
-            message && React__default['default'].createElement("div", { className: "w-guide-tour-message" }, message),
-            React__default['default'].createElement("div", { className: "w-guide-tour-footer" },
-                React__default['default'].createElement("button", { className: "w-guide-tour-skip", onClick: _skip }, "Skip"),
-                React__default['default'].createElement("button", { className: "w-guide-tour-next", onClick: nextStep }, step === total ? "Finish" : "Next")),
-            React__default['default'].createElement("div", { className: "w-guide-tour-step" }, _renderStep && _renderStep.map(function (ele) { return ele; }))), document.getElementsByTagName("body")[0]))) : (children);
+        ReactDOM__default["default"].createPortal(React__default["default"].createElement("div", { ref: refChildren, className: "w-guide-tour-cp ".concat(position.join(" ")) },
+            title && React__default["default"].createElement("div", { className: "w-guide-tour-title" }, title),
+            message && React__default["default"].createElement("div", { className: "w-guide-tour-message" }, message),
+            React__default["default"].createElement("div", { className: "w-guide-tour-footer" },
+                React__default["default"].createElement("button", { className: "w-guide-tour-skip", onClick: _skip }, "Skip"),
+                React__default["default"].createElement("button", { className: "w-guide-tour-next", onClick: nextStep }, step === total ? "Finish" : "Next")),
+            React__default["default"].createElement("div", { className: "w-guide-tour-step" }, _renderStep && _renderStep.map(function (ele) { return ele; }))), document.getElementsByTagName("body")[0]))) : (children);
 }
 
 function Guide(props) {
     var mode = React.useContext(GuideContext$1).mode;
-    return mode === "action-driven" ? (React__default['default'].createElement(ActionDrivenComponent, __assign({}, props))) : (React__default['default'].createElement(TourComponent, __assign({}, props)));
+    return mode === "action-driven" ? (React__default["default"].createElement(ActionDrivenComponent, __assign({}, props))) : (React__default["default"].createElement(TourComponent, __assign({}, props)));
 }
 var GuideContext = GuideContext$1;
 var GuideProvider = GuideProvider$1;
 
 exports.GuideContext = GuideContext;
 exports.GuideProvider = GuideProvider;
-exports['default'] = Guide;
+exports["default"] = Guide;
 //# sourceMappingURL=index.cjs.js.map

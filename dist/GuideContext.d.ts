@@ -5,6 +5,7 @@ export interface IGuide {
     previousStep?: any;
     run: boolean;
     setStep: any;
+    setRun: any;
     setTotal?: any;
     step: number;
     total?: number;
